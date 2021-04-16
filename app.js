@@ -8,7 +8,7 @@ var time_elapsed;
 var interval;
 
 
-// Config keys:
+// Config keys for settings:
 var key_up = "ArrowUp";
 var key_down = "ArrowDown";
 var key_left = "ArrowLeft";
@@ -70,13 +70,35 @@ function updateKeyControls(key_to_change) {
 
 }
 
-function updateTextInput(val) {
-    document.getElementById('slider_value').value = val;
+// update value when scrolling slider
+function updateTextInput(val, slider) {
+    document.getElementById(slider).value = val;
+}
+
+// generate random int within range
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
+// function for setting's random button
+function generateRandomSettings() {
+    let balls = getRandomInt(50, 91);
+    let monsters = getRandomInt(1, 5);
+    let time = getRandomInt(60, 181);
+    document.getElementById('slider_value_balls').value = balls;
+    document.getElementById('slider_value_monsters').value = monsters;
+    document.getElementById('slider_value_time').value = time;
+    document.getElementById('slider_bar_balls').value = balls;
+    document.getElementById('slider_bar_monsters').value = monsters;
+    document.getElementById('slider_bar_time').value = time;
 }
 
 
-
-
+function changeBallColor(color, ball_id) {
+    document.getElementById(ball_id).style.backgroundColor = color;
+}
 
 // --------------------------------------------------------------------------------------------------
 $(document).ready(function() {

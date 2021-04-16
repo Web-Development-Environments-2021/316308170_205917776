@@ -8,7 +8,9 @@
 </head>
 
 <body>
-    <header>header</header>
+    <header>
+        <img src="./images/logo.jpg" style="width: 250px; height: auto; display: block; margin: auto;">
+    </header>
     <!-- Navigation Bar -->
     <div class="topnav">
         <a id="#welcome" onclick="menu('welcome')">Welcome</a>
@@ -20,75 +22,155 @@
     <div class="content">
         <!-- Welcome div -->
         <div class="welcome">
-            <p>welcome logo!</p>
-            <button onclick="menu('register')">Sign Up</button>
-            <button onclick="menu('login')">Sign In</button>
+            <img src="./images/pacman logo.png" class="welcome_logo">
+            <button class="glowing_button" style="top: -80px;" onclick="menu('register')">Sign Up</button>
+            <button class="glowing_button" style="top: -80px;" onclick="menu('login')">Sign In</button>
         </div>
         <!-- Register div -->
         <div class="register">
+            <h1>Sign Up</h1>
             <form id='register_form'>
                 <div class="username">
-                    <label for="username">Username:</label>
-                    <input type="text" placeholder="username" name="username" id="username_input" required>
+                    <div class="text_left">
+                        <label for="username">Username:</label>
+                    </div>
+                    <div class="field_right">
+                        <input type="text" placeholder="Username" name="username" id="username_input" required>
+                    </div>
                 </div>
                 <div class="password">
-                    <label for="password">Password:</label>
-                    <input type="password" placeholder="password" name="password" id="password_input" required>
+                    <div class="text_left">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="field_right">
+                        <input type="password" placeholder="Password" name="password" id="password_input" required>
+                    </div>
                 </div>
                 <div class="full_name">
-                    <label for="full_name">Full Name:</label>
-                    <input type="text" placeholder="Full Name" name="full_name" id="full_name_input" required>
+                    <div class="text_left">
+                        <label for="full_name">Full Name:</label>
+                    </div>
+                    <div class="field_right">
+                        <input type="text" placeholder="Full Name" name="full_name" id="full_name_input" required>
+                    </div>
                 </div>
                 <div class="email">
-                    <label for="email">Email:</label>
-                    <input type="text" placeholder="Email" name="email" id="email_input" required>
+                    <div class="text_left">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="field_right">
+                        <input type="text" placeholder="Email" name="email" id="email_input" required>
+                    </div>
                 </div>
                 <div class="birthdate">
-                    <label for="birthdate">Birth Date:</label>
-                    <input type="date" placeholder="birthdate" name="birthdate" id="birthdate_input" required>
+                    <div class="text_left">
+                        <label for="birthdate">Birth Date:</label>
+                    </div>
+                    <div class="field_right">
+                        <input type="date" placeholder="birthdate" name="birthdate" id="birthdate_input" required>
+                    </div>
                 </div>
-                <button type="submit" onclick="checkFormValidity()">Sign Up</button>
+                <button class="glowing_button" type="submit" onclick="checkFormValidity()" style="top: 30px;">Sign Up</button>
             </form>
         </div>
         <!-- Log In div -->
         <div class="login">
+            <h1>Log In</h1>
             <div class="username">
-                <label for="username">Username:</label>
-                <input type="text" placeholder="username" name="username" id="username_input" required>
+                <div class="text_left">
+                    <label for="username">Username:</label>
+                </div>
+                <div class="field_right">
+                    <input type="text" placeholder="Username" name="username" id="username_input" required>
+                </div>
             </div>
             <div class="password">
-                <label for="password">Password:</label>
-                <input type="password" placeholder="password" name="password" id="password_input" required>
+                <div class="text_left">
+                    <label for="password">Password:</label>
+                </div>
+                <div class="field_right">
+                    <input type="password" placeholder="Password" name="password" id="password_input" required>
+                </div>
             </div>
-            <button type="submit" onclick="menu('settings')">Log In</button>
+            <br>
+            <button class="glowing_button" type="submit" onclick="menu('settings')">Log In</button>
         </div>
         <!-- About div -->
         <div class="about">about</div>
 
         <!-- Settings div -->
         <div class="settings">
-            <div id="MoveUp">
-                <label for="ArrowUp">Move Up:</label>
-                <input type="button" name="key_button" value="ArrowUp" id="MoveUp_input" onclick="updateKeyControls('MoveUp_input')" required>
+            <h1>Settings</h1>
+            <div id="settings_button_div">
+                <div class="text_left">
+                    <label for="ArrowUp">Move Up:</label>
+                </div>
+                <div class="field_right">
+                    <input class="key_button" type="button" name="key_button" value="ArrowUp" id="MoveUp_input" onclick="updateKeyControls('MoveUp_input')" required>
+                </div>
             </div>
-            <div id="MoveDown">
-                <label for="ArrowDown">Move Down:</label>
-                <input type="button" name="key_button" value="ArrowDown" id="MoveDown_input" onclick="updateKeyControls('MoveDown_input')" required>
+            <div id="settings_button_div">
+                <div class="text_left">
+                    <label for="ArrowDown">Move Down:</label>
+                </div>
+                <div class="field_right">
+                    <input class="key_button" type="button" name="key_button" value="ArrowDown" id="MoveDown_input" onclick="updateKeyControls('MoveDown_input')" required>
+                </div>
             </div>
-            <div id="MoveRight">
-                <label for="ArrowRight">Move Right:</label>
-                <input type="button" name="key_button" value="ArrowRight" id="MoveRight_input" onclick="updateKeyControls('MoveRight_input')" required>
+            <div id="settings_button_div">
+                <div class="text_left">
+                    <label for="ArrowRight">Move Right:</label>
+                </div>
+                <div class="field_right">
+                    <input class="key_button" type="button" name="key_button" value="ArrowRight" id="MoveRight_input" onclick="updateKeyControls('MoveRight_input')" required>
+                </div>
             </div>
-            <div id="MoveLeft">
-                <label for="ArrowLeft">Move Left:</label>
-                <input type="button" name="key_button" value="ArrowLeft" id="MoveLeft_input" onclick="updateKeyControls('MoveLeft_input')" required>
+            <div id="settings_button_div">
+                <div class="text_left">
+                    <label for="ArrowLeft">Move Left:</label>
+                </div>
+                <div class="field_right">
+                    <input class="key_button" type="button" name="key_button" value="ArrowLeft" id="MoveLeft_input" onclick="updateKeyControls('MoveLeft_input')" required>
+                </div>
             </div>
             <div class="slidecontainer">
-                <label>Choose number of balls in game:</label>
-                <!-- <input type="range" min="50" max="90" value="70" class="slider" id="myRange" onvolumechange="updateValue(this.value)"> -->
-                <input type="range" name="rangeInput" min="50" max="90" onchange="updateTextInput(this.value);">
-                <input type="text" id="slider_value" value="70" style="width:30px; text-align:center">
+                <div class="text_left">
+                    <label>Choose number of balls in game:</label>
+                </div>
+                <div class="field_right">
+                    <input type="range" id=slider_bar_balls name="rangeInput" min="50" max="90" oninput="updateTextInput(this.value, 'slider_value_balls');">
+                    <input type="text" id="slider_value_balls" value="70" readonly="readonly" style="width:30px; text-align:center">
+                </div>
             </div>
+            <div class="slidecontainer">
+                <div class="text_left">
+                    <label>Choose number of monsters in game:</label>
+                </div>
+                <div class="field_right">
+                    <input type="range" id=slider_bar_monsters name="rangeInput" min="1" max="4" oninput="updateTextInput(this.value, 'slider_value_monsters');">
+                    <input type="text" id="slider_value_monsters" value="3" readonly="readonly" style="width:30px; text-align:center">
+                </div>
+            </div>
+            <div class="slidecontainer">
+                <div class="text_left">
+                    <label>Choose number of seconds to play:</label>
+                </div>
+                <div class="field_right">
+                    <input type="range" id=slider_bar_time name="rangeInput" min="60" max="180" oninput="updateTextInput(this.value, 'slider_value_time');">
+                    <input type="text" id="slider_value_time" value="90" readonly="readonly" style="width:30px; text-align:center">
+                </div>
+            </div>
+            <br>
+            <div>
+                <input id="color1" type="color" style="opacity: 0; z-index: 9999;" oninput="changeBallColor(this.value,'colorBtn1')" />
+                <label class="colorBtn" id="colorBtn1" for="color" style="top: 0px; left: -65px; z-index: -1;">5</label>
+                <input id="color2" type="color" style="opacity: 0; z-index: 9999;" oninput="changeBallColor(this.value,'colorBtn2')" />
+                <label class="colorBtn" id="colorBtn2" for="color" style="top: 0px; left: -65px; z-index: -1;">15</label>
+                <input id="color3" type="color" style="opacity: 0; z-index: 9999;" oninput="changeBallColor(this.value,'colorBtn3')" />
+                <label class="colorBtn" id="colorBtn3" for="color" style="top: 0px; left: -65px; z-index: -1;">25</label>
+            </div>
+            <button class="glowing_button" type="submit" onclick="generateRandomSettings()" style="top: 30px;">Random Settings</button>
+            <button class="glowing_button" type="submit" onclick="menu('pacman')" style="top: 30px;">Play</button>
         </div>
         <!-- Pacman div -->
         <div class="pacman">
@@ -105,6 +187,7 @@
             </div>
         </div>
     </div>
+    <footer>Contact us! &#9993 Ariel Shilo: shiloari@post.bgu.ac.il &#9993 Gal Alkalay: ???</footer>
 </body>
 
 </html>
