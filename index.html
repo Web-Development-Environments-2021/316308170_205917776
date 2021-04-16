@@ -1,21 +1,110 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="./app.js"></script>
-	</head>
 
-	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
-		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
-		</div>
-	</body>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="./jquery-3.4.1.slim.min.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+</head>
+
+<body>
+    <header>header</header>
+    <!-- Navigation Bar -->
+    <div class="topnav">
+        <a id="#welcome" onclick="menu('welcome')">Welcome</a>
+        <a id="#register" onclick="menu('register')">Register</a>
+        <a id="#login" onclick="menu('login')">Log In</a>
+        <a id="#about" onclick="menu('about')">About</a>
+    </div>
+    <!-- Content div -->
+    <div class="content">
+        <!-- Welcome div -->
+        <div class="welcome">
+            <p>welcome logo!</p>
+            <button onclick="menu('register')">Sign Up</button>
+            <button onclick="menu('login')">Sign In</button>
+        </div>
+        <!-- Register div -->
+        <div class="register">
+            <form id='register_form'>
+                <div class="username">
+                    <label for="username">Username:</label>
+                    <input type="text" placeholder="username" name="username" id="username_input" required>
+                </div>
+                <div class="password">
+                    <label for="password">Password:</label>
+                    <input type="password" placeholder="password" name="password" id="password_input" required>
+                </div>
+                <div class="full_name">
+                    <label for="full_name">Full Name:</label>
+                    <input type="text" placeholder="Full Name" name="full_name" id="full_name_input" required>
+                </div>
+                <div class="email">
+                    <label for="email">Email:</label>
+                    <input type="text" placeholder="Email" name="email" id="email_input" required>
+                </div>
+                <div class="birthdate">
+                    <label for="birthdate">Birth Date:</label>
+                    <input type="date" placeholder="birthdate" name="birthdate" id="birthdate_input" required>
+                </div>
+                <button type="submit" onclick="checkFormValidity()">Sign Up</button>
+            </form>
+        </div>
+        <!-- Log In div -->
+        <div class="login">
+            <div class="username">
+                <label for="username">Username:</label>
+                <input type="text" placeholder="username" name="username" id="username_input" required>
+            </div>
+            <div class="password">
+                <label for="password">Password:</label>
+                <input type="password" placeholder="password" name="password" id="password_input" required>
+            </div>
+            <button type="submit" onclick="menu('settings')">Log In</button>
+        </div>
+        <!-- About div -->
+        <div class="about">about</div>
+
+        <!-- Settings div -->
+        <div class="settings">
+            <div id="MoveUp">
+                <label for="ArrowUp">Move Up:</label>
+                <input type="button" name="key_button" value="ArrowUp" id="MoveUp_input" onclick="updateKeyControls('MoveUp_input')" required>
+            </div>
+            <div id="MoveDown">
+                <label for="ArrowDown">Move Down:</label>
+                <input type="button" name="key_button" value="ArrowDown" id="MoveDown_input" onclick="updateKeyControls('MoveDown_input')" required>
+            </div>
+            <div id="MoveRight">
+                <label for="ArrowRight">Move Right:</label>
+                <input type="button" name="key_button" value="ArrowRight" id="MoveRight_input" onclick="updateKeyControls('MoveRight_input')" required>
+            </div>
+            <div id="MoveLeft">
+                <label for="ArrowLeft">Move Left:</label>
+                <input type="button" name="key_button" value="ArrowLeft" id="MoveLeft_input" onclick="updateKeyControls('MoveLeft_input')" required>
+            </div>
+            <div class="slidecontainer">
+                <label>Choose number of balls in game:</label>
+                <!-- <input type="range" min="50" max="90" value="70" class="slider" id="myRange" onvolumechange="updateValue(this.value)"> -->
+                <input type="range" name="rangeInput" min="50" max="90" onchange="updateTextInput(this.value);">
+                <input type="text" id="slider_value" value="70" style="width:30px; text-align:center">
+            </div>
+        </div>
+        <!-- Pacman div -->
+        <div class="pacman">
+            <div id="score">
+                <label for="lblScore">SCORE:</label>
+                <input id="lblScore" type="text" />
+            </div>
+            <div id="time">
+                <label for="lblTime">TIME:</label>
+                <input id="lblTime" type="text" />
+            </div>
+            <div id="game">
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

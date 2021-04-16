@@ -1,0 +1,104 @@
+body {
+    background: url("./images/background.jpeg") no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+header {
+    top: 0;
+    left: 0;
+    height: 20px;
+    position: fixed;
+    width: 100%;
+    background-color: black;
+    overflow: hidden;
+}
+
+.topnav {
+    top: 20px;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    background-color: black;
+    overflow: hidden;
+    z-index: 9999;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    color: #FFFF00;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a:active {
+    background-color: #ff6673;
+    color: white;
+}
+
+.content {
+    position: fixed;
+    left: 20%;
+    top: 15%;
+    width: 60%;
+    height: 80%;
+    border: solid 5px white;
+}
+
+#canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.welcome {
+    text-align: center;
+}
+
+.welcome p {
+    color: chartreuse;
+}
+
+.register {
+    display: none;
+    text-align: center;
+}
+
+.register label {
+    color: white;
+}
+
+.login {
+    display: none;
+    text-align: center;
+}
+
+.login label {
+    color: white;
+}
+
+.about {
+    display: none
+}
+
+.pacman {
+    display: none;
+}
+
+.settings {
+    display: none;
+    text-align: center;
+}
+
+.settings label,
+p {
+    color: white;
+}
