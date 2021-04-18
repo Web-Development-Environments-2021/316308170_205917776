@@ -4,7 +4,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="./jquery-3.4.1.slim.min.js"></script>
-    <script type="text/javascript" src="./app.js"></script>
+    <script type="text/javascript" src="./game.js"></script>
+    <script type="text/javascript" src="./menu.js"></script>
 </head>
 
 <body>
@@ -162,32 +163,34 @@
             </div>
             <br>
             <div>
-                <input id="color1" type="color" style="opacity: 0; z-index: 9999;" oninput="changeBallColor(this.value,'colorBtn1')" />
+                <input id="color1" type="color" style="opacity: 0;" oninput="changeBallColor(this.value,'colorBtn1')" />
                 <label class="colorBtn" id="colorBtn1" for="color" style="top: 0px; left: -65px; z-index: -1;">5</label>
-                <input id="color2" type="color" style="opacity: 0; z-index: 9999;" oninput="changeBallColor(this.value,'colorBtn2')" />
+                <input id="color2" type="color" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn2')" />
                 <label class="colorBtn" id="colorBtn2" for="color" style="top: 0px; left: -65px; z-index: -1;">15</label>
-                <input id="color3" type="color" style="opacity: 0; z-index: 9999;" oninput="changeBallColor(this.value,'colorBtn3')" />
+                <input id="color3" type="color" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn3')" />
                 <label class="colorBtn" id="colorBtn3" for="color" style="top: 0px; left: -65px; z-index: -1;">25</label>
             </div>
             <button class="glowing_button" type="submit" onclick="generateRandomSettings()" style="top: 30px;">Random Settings</button>
-            <button class="glowing_button" type="submit" onclick="menu('pacman')" style="top: 30px;">Play</button>
+            <button class="glowing_button" type="submit" onclick="menu('pacman'); Start();" style="top: 30px;">Play</button>
         </div>
         <!-- Pacman div -->
         <div class="pacman">
-            <div id="score">
+            <!-- <div id="score">
                 <label for="lblScore">SCORE:</label>
                 <input id="lblScore" type="text" />
             </div>
             <div id="time">
                 <label for="lblTime">TIME:</label>
                 <input id="lblTime" type="text" />
-            </div>
+            </div> -->
             <div id="game">
-                <canvas id="canvas"></canvas>
+                <canvas id="hud" width="1024" height="550"></canvas>
+                <canvas id="canvas" width="1024" height="550"></canvas>
             </div>
         </div>
+
     </div>
-    <footer>Contact us! &#9993 Ariel Shilo: shiloari@post.bgu.ac.il &#9993 Gal Alkalay: ???</footer>
+    <footer>Contact us! &#9993 Ariel Shilo: shiloari@post.bgu.ac.il &#9993 Gal Alkalay: alkalayg@post.bgu.ac.il</footer>
 </body>
 
 </html>
