@@ -1,7 +1,7 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 var canvas_width = 1000;
-var canvas_height = 560;
+var canvas_height = 620;
 var scale = window.devicePixelRatio
 canvas.width = canvas_width * scale;
 canvas.height = canvas_height * scale;
@@ -18,7 +18,7 @@ var velocity = 1;
 var mouth_open_counter = 0;
 
 var board = new Board([canvas.width / 8,0]);
-var pacman = new Pacman(canvas.width / 8 + 30,30,0,0);
+var pacman = new Pacman(canvas.width / 8+ 30,30,0,0);
 pacman.locationOngrid = board.getLocation([pacman.X,pacman.Y]);
 
 function animate() {
