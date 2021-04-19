@@ -27,36 +27,22 @@ var grid = [
     [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
     [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
-
-
 ]
 
 
+
 class Board {
-    constructor() {
-        this.width = 200
-        this.height = 200
-        this.X = 28
-        this.Y = 28
+    constructor(startlocation) {
+        this.width = 28;
+        this.height = 28;
         this.wall_size = 20;
-        this.game_board = new Array(this.X);
-        for (var i = 0; i < this.X; i++) {
-            this.game_board[i] = new Array(this.Y);
+        this.startLocation = startlocation;
+        this.game_board = new Array(this.width);
+        for (var i = 0; i < this.width; i++) {
+            this.game_board[i] = new Array(this.height);
         }
         // console.log('here1')
     }
-    rgbToHex(r, g, b) {
-        if (r > 255 || g > 255 || b > 255)
-            throw "Invalid color component";
-        return ((r << 16) | (g << 8) | b).toString(16);
-    }
-    GetPixel(context, x, y) {
-        var p = context.getImageData(x, y, 1, 1).data;
-        var hex = "#" + ("000000" + this.rgbToHex(p[0], p[1], p[2])).slice(-6);
-        return hex;
-    }
-
-
     // generateBoard() {
     //     for (var i = 0; i < this.X; i++) {
     //         for (var j = 0; i < this.Y; i++) {
@@ -68,13 +54,19 @@ class Board {
     //     }
     //     // console.log('here2');
     // }
-
+    
+    getLocation(location){
+        var x =  Math.floor((location[0] - this.startLocation[0])/(this.wall_size))
+        var y =  Math.floor((location[1] - this.startLocation[1])/(this.wall_size))
+        return [x,y];
+    };
+    
     draw() {
-        for (var i = 0; i < this.X; i++) {
-            for (var j = 0; j < this.Y; j++) {
+        for (var i = 0; i < this.width; i++) {
+            for (var j = 0; j < this.height; j++) {
                 if (grid[i][j] == 3) {
                     context.beginPath();
-                    context.rect(canvas.width / 8 + 20 * j, 20 * i, this.wall_size, this.wall_size);
+                    context.rect(this.startLocation[0] + this.wall_size * j, this.startLocation[1] + this.wall_size * i, this.wall_size, this.wall_size);
                     context.fillStyle = "blue"; //color
                     context.fill();
                 }
@@ -83,5 +75,3 @@ class Board {
         // console.log('here3');
     }
 }
-
-var board = new Board();

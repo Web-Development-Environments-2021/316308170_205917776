@@ -1,24 +1,28 @@
-class Pacman {
-    constructor() {
-        this.X = 0;
-        this.Y = 40;
-        this.vx = 0;
-        this.vy = 0;
-        this.width = 20;
-        this.height = 20;
+
+
+
+class Pacman extends MoveObject{
+    constructor(X,Y,vx,vy) {
+        super(X,Y,vx,vy);
+        // this.width = 20;
+        // this.height = 20;
         this.body_radius = 8;
         this.start_angle = 0.15;
         this.finish_angle = 1.85;
     }
 
-    update() {
-        if (this.Y + this.vx > board.wall_size) {
-            this.X += this.vx;
-            this.Y += this.vy;
-        }
+    update() {       
+        // if (this.Y + this.vx > board.wall_size) {
+        collisionDetection()
+        this.X += this.vx;
+        this.Y += this.vy;
+        this.locationOngrid =  board.getLocation([this.X,this.Y]); //return the last location accurate on grid [x,y]
+        
     }
 
     setVelocity(vx, vy) {
+        this.locationOngrid =  board.getLocation([this.X,this.Y]);
+        if (this.checkForTurnCollision(vx,vy)) return; // true - false 
         this.vx = vx;
         this.vy = vy;
         this.changeDirection(vx, vy);
@@ -56,5 +60,3 @@ class Pacman {
         }
     }
 }
-
-pacman = new Pacman();

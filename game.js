@@ -7,19 +7,22 @@ canvas.width = canvas_width * scale;
 canvas.height = canvas_height * scale;
 context.scale(scale, scale);
 
+console.clear();
 
 var break_animation = false;
 var goUp = 'ArrowUp';
 var goDown = 'ArrowDown';
 var goLeft = 'ArrowLeft';
 var goRight = 'ArrowRight';
-var velocity = 2;
+var velocity = 1;
 var mouth_open_counter = 0;
 
+var board = new Board([canvas.width / 8,0]);
+var pacman = new Pacman(canvas.width / 8 + 30,30,0,0);
+pacman.locationOngrid = board.getLocation([pacman.X,pacman.Y]);
 
 function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    console.log('animate');
     board.draw();
     pacman.update();
     pacman.draw(mouth_open_counter);
@@ -37,6 +40,5 @@ window.addEventListener('keydown', function(e) {
         else if (e.code === goRight) pacman.setVelocity(velocity, 0);
     })
     // board.generateBoard();
-pacman.X = (canvas.width / 8 + 30);
-pacman.Y = 30;
+
 animate();
