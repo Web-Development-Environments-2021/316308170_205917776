@@ -35,15 +35,11 @@ var grid = [
 
 
 class Board {
-    constructor(startlocation) {
+    constructor(startlocation,wallsize) {
         this.width = 31;
         this.height = 28;
-        this.wall_size = 20;
+        this.wall_size = wallsize;
         this.startLocation = startlocation;
-        this.game_board = new Array(this.width);
-        for (var i = 0; i < this.width; i++) {
-            this.game_board[i] = new Array(this.height);
-        }
         // console.log('here1')
     }
     // generateBoard() {
@@ -63,6 +59,12 @@ class Board {
         var y =  Math.floor((location[1] - this.startLocation[1])/(this.wall_size))
         return [x,y];
     };
+    
+    getPixel(location){
+        var px_X = (location[0] * this.wall_size) + this.startLocation[0];
+        var px_Y = (location[1] * this.wall_size) + this.startLocation[1];
+        return [px_X,px_Y]
+    }
     
     draw() {
         for (var i = 0; i < this.width; i++) {

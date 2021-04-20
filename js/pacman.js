@@ -2,11 +2,11 @@
 
 
 class Pacman extends MoveObject{
-    constructor(X,Y,vx,vy) {
-        super(X,Y,vx,vy);
+    constructor(X,Y,vx,vy,center_point) {
+        super(X,Y,vx,vy,center_point);
         // this.width = 20;
         // this.height = 20;
-        this.body_radius = 8;
+        this.body_radius = wall_size*8/20;
         this.start_angle = 0.15;
         this.finish_angle = 1.85;
         this.next_vx = 0;

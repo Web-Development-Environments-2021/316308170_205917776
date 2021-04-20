@@ -2,12 +2,13 @@
 
 
 class MoveObject{
-    constructor(X,Y,vx,vy){
+    constructor(X,Y,vx,vy,center_point){
         this.X = X;
         this.Y = Y;
         this.locationOngrid = [0,0] 
         this.vx = vx;
         this.vy = vy;
+        this.center_point = center_point;
     }
 
     checkRealPoint(){
@@ -15,8 +16,8 @@ class MoveObject{
     
         var real_x = this.locationOngrid[0];
         var real_y = this.locationOngrid[1];
-        var px_x = Math.floor(real_x * board.wall_size + board.startLocation[0] + board.wall_size/2);
-        var px_y = Math.floor(real_y * board.wall_size + board.startLocation[1] + board.wall_size/2);
+        var px_x = Math.floor(real_x * board.wall_size + board.startLocation[0] + this.center_point); //change here for ghost img!
+        var px_y = Math.floor(real_y * board.wall_size + board.startLocation[1] + this.center_point);
 
         if(px_x == Math.floor(this.X) && px_y == Math.floor(this.Y)) return true;
         
@@ -35,7 +36,7 @@ class MoveObject{
         var isWall = grid[Next_location[1] + vel_y][Next_location[0] + vel_x] == 3;
 
         if(isWall && this.checkRealPoint()){
-            console.log(Next_location, " vx: ", vel_x," vy : ", vel_y)
+            // console.log(Next_location, " vx: ", vel_x," vy : ", vel_y)
             return true;
         } 
         
