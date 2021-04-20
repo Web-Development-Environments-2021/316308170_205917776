@@ -204,18 +204,3 @@ function UpdatePosition() {
         Draw();
     }
 }
-
-function menu(nav) {
-    hide();
-    $('.' + nav).show();
-};
-
-function hide() {
-    $('.welcome').hide();
-    $('.register').hide();
-    $('.login').hide();
-    $('.pacman').hide();
-    $('.settings').hide();
-    $('.about').hide();
-    // resetGame();
-};

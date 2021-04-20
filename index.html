@@ -3,9 +3,8 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="./jquery-3.4.1.slim.min.js"></script>
-    <script type="text/javascript" src="./game.js"></script>
-    <script type="text/javascript" src="./menu.js"></script>
+    <script src="./js/jquery-3.4.1.slim.min.js"></script>
+    <script type="text/javascript" src="./js/menu.js"></script>
 </head>
 
 <body>
@@ -171,21 +170,17 @@
                 <label class="colorBtn" id="colorBtn3" for="color" style="top: 0px; left: -65px; z-index: -1;">25</label>
             </div>
             <button class="glowing_button" type="submit" onclick="generateRandomSettings()" style="top: 30px;">Random Settings</button>
-            <button class="glowing_button" type="submit" onclick="menu('pacman'); Start();" style="top: 30px;">Play</button>
+            <button class="glowing_button" type="submit" onclick="menu('pacman');" style="top: 30px;">Play</button>
         </div>
         <!-- Pacman div -->
         <div class="pacman">
-            <!-- <div id="score">
-                <label for="lblScore">SCORE:</label>
-                <input id="lblScore" type="text" />
-            </div>
-            <div id="time">
-                <label for="lblTime">TIME:</label>
-                <input id="lblTime" type="text" />
-            </div> -->
             <div id="game">
-                <canvas id="hud" width="1024" height="550"></canvas>
-                <canvas id="canvas" width="1024" height="550"></canvas>
+                <canvas id="canvas" width="1920" height="1080"></canvas>
+                <script src="./js/board.js"></script>
+                <script src="./js/MoveObject.js"></script>
+                <script src="./js/pacman.js"></script>
+                <script src="./js/ghost.js"></script>
+                <script src="./js/game.js"></script>
             </div>
         </div>
 

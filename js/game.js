@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
-var wall_size = 12 ;
+var wall_size = 14 ;
 var canvas_width = 1000;
 var canvas_height = wall_size * 31;
 var scale = window.devicePixelRatio
@@ -42,6 +42,11 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
+function resetGame(){
+    break_animation = true;
+    break_animation = false;
+}
+
 window.addEventListener('keydown', function(e) {
         if (e.code === 'Space') break_animation = true;
         else if (e.code === goUp) pacman.setVelocity(0, -velocity);
@@ -51,4 +56,4 @@ window.addEventListener('keydown', function(e) {
     })
     // board.generateBoard();
 
-animate();
+

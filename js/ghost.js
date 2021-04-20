@@ -34,16 +34,11 @@ class Ghost extends MoveObject{
                 }
             }
         }  
-        console.log(this.move_direction , "=========", best_direction);
         if(best_direction != ""){
             this.direction = this.img_locations[best_direction];
             this.vx = this.move_direction[best_direction][0];
             this.vy = this.move_direction[best_direction][1];
          }
-        if(this.collisionDetection()) {
-            // this.vx = 0;
-            // this.vy = 0;
-        }
         
         this.changeDirection(this.vx,this.vy)
         this.X += this.vx;

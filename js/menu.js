@@ -88,3 +88,27 @@ function generateRandomSettings() {
 function changeBallColor(color, ball_id) {
     document.getElementById(ball_id).style.backgroundColor = color;
 }
+
+
+function menu(nav) {
+    hide();
+    $('.' + nav).show();
+    if(nav == 'pacman') {
+        $('#canvas').show();
+        animate();
+    }
+    else{
+        resetGame();
+    }
+};
+
+function hide() {
+    $('.welcome').hide();
+    $('.register').hide();
+    $('.login').hide();
+    $('.pacman').hide();
+    $('.settings').hide();
+    $('.about').hide();
+    $('#canvas').hide();
+    // resetGame();
+};
