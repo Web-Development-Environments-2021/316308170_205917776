@@ -11,6 +11,16 @@ body {
     background-size: cover;
 }
 
+#upper_logo {
+    width: 250px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    padding: 2px;
+    overflow: visible;
+    z-index: 30;
+}
+
 header {
     top: 0;
     left: 0;
@@ -24,12 +34,14 @@ header {
 
 .topnav {
     position: relative;
-    left: 33%;
-    width: 50%;
+    margin: 0 auto;
+    width: 35%;
+    display: flex;
+    justify-content: center;
     height: 10%;
     background-color: rgba(0, 0, 0, 0);
     overflow: hidden;
-    z-index: 500;
+    z-index: 1;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 

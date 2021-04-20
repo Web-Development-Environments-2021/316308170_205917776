@@ -10,7 +10,17 @@ context.scale(scale, scale);
 var ghost_img = document.createElement("img");
 ghost_img.src = "./images/ghosts.png"
 
-console.clear();
+
+function setGameValues() {
+    var num_of_balls = document.getElementById('slider_value_balls').value;
+    var num_of_ghosts = document.getElementById('slider_value_monsters').value;
+    var num_of_minutes = document.getElementById('slider_value_time').value;
+    board.generateRandomBalls(num_of_balls);
+    console.log(grid)
+    console.log(num_of_balls, num_of_ghosts, num_of_minutes);
+
+}
+
 
 // ghost sprite size (160,160) space (30), space to other ghost (50,30)
 
@@ -21,11 +31,10 @@ var goLeft = 'ArrowLeft';
 var goRight = 'ArrowRight';
 var velocity = 2; // 1 or 2 
 var mouth_open_counter = 0;
-
 var board = new Board([canvas.width / 6, 0], wall_size);
 var pacman_start = board.getPixel([13, 15])
 var pacman = new Pacman(pacman_start[0] + (wall_size / 2), pacman_start[1] + (wall_size / 2), 0, 0, wall_size / 2);
-var blinky = new Ghost(canvas.width / 6 + wall_size, wall_size, 0, 0, 0, 0, wall_size, velocity)
+var blinky = new Ghost(canvas.width / 6 + wall_size, wall_size, velocity - 0.5, 0, 0, 0, wall_size, velocity - 0.5);
 pacman.locationOngrid = board.getLocation([pacman.X, pacman.Y]);
 blinky.locationOngrid = board.getLocation([blinky.X, blinky.Y]);
 
@@ -33,11 +42,10 @@ function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     board.draw();
     pacman.update();
-    pacman.draw(mouth_open_counter);
+    pacman.draw();
     blinky.update();
     blinky.draw();
-    ++mouth_open_counter;
-    if (mouth_open_counter > 10) mouth_open_counter = 0;
+
     if (break_animation) return;
     requestAnimationFrame(animate);
 }
@@ -56,11 +64,3 @@ window.addEventListener('keydown', function(e) {
         else if (e.code === goRight) pacman.setVelocity(velocity, 0);
     })
     // board.generateBoard();
-
-const reloadtButton = document.querySelector("#reload");
-// Reload everything:
-function reload() {
-    reload = location.reload();
-}
-// Event listeners for reload
-reloadButton.addEventListener("click", reload, false);

@@ -9,14 +9,14 @@
 
 <body>
     <header>
-        <img src="./images/logo.jpg" style="width: 250px; height: auto; display: block; margin: auto;">
+        <img id="upper_logo" src="./images/logo.jpg">
     </header>
     <!-- Navigation Bar -->
     <div class="topnav">
-        <a id="#welcome" onclick="menu('welcome'); window.location.reload();">Welcome</a>
-        <a id="#register" onclick="menu('register'); window.location.reload();">Register</a>
-        <a id="#login" onclick="menu('login'); window.location.reload();">Log In</a>
-        <a id="#about" onclick="menu('about'); window.location.reload();">About</a>
+        <a id="#welcome" onclick="menu('welcome');">Welcome</a>
+        <a id="#register" onclick="menu('register');">Register</a>
+        <a id="#login" onclick="menu('login');">Log In</a>
+        <a id="#about" onclick="menu('about');">About</a>
     </div>
     <!-- Content div -->
     <div class="content">
@@ -170,7 +170,7 @@
                 <label class="colorBtn" id="colorBtn3" for="color" style="top: 0px; left: -65px; z-index: -1;">25</label>
             </div>
             <button class="glowing_button" type="submit" onclick="generateRandomSettings()" style="top: 30px;">Random Settings</button>
-            <button class="glowing_button" type="submit" onclick="menu('pacman');" style="top: 30px;">Play</button>
+            <button class="glowing_button" type="submit" onclick="menu('pacman'); setGameValues();" style="top: 30px;">Play</button>
         </div>
         <!-- Pacman div -->
         <div class="pacman">

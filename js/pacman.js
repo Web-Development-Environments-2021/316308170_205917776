@@ -8,6 +8,7 @@ class Pacman extends MoveObject {
         this.finish_angle = 1.85;
         this.next_vx = 0;
         this.next_vy = 0;
+        this.mouth_open = 0;
     }
 
     update() {
@@ -25,7 +26,10 @@ class Pacman extends MoveObject {
         this.X += this.vx;
         this.Y += this.vy;
         this.locationOngrid = board.getLocation([this.X, this.Y]); //return the last location accurate on grid [x,y]
-
+        if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 1) {
+            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
+            console.log('eat')
+        }
     }
 
     setVelocity(vx, vy) {
@@ -50,8 +54,9 @@ class Pacman extends MoveObject {
         }
     }
 
-    draw(mouth_open) {
-        if (mouth_open < 5) {
+    draw() {
+        if (this.mouth_open > 10) this.mouth_open = 0;
+        if (this.mouth_open < 5) {
             context.beginPath();
             context.arc(this.X, this.Y, this.body_radius, this.start_angle * Math.PI, this.finish_angle * Math.PI); // half circle
             context.lineTo(this.X, this.Y);
@@ -64,5 +69,6 @@ class Pacman extends MoveObject {
             context.fillStyle = "yellow"; //color
             context.fill();
         }
+        this.mouth_open++;
     }
 }
