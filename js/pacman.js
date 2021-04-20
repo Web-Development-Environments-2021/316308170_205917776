@@ -1,38 +1,35 @@
-
-
-
-class Pacman extends MoveObject{
-    constructor(X,Y,vx,vy,center_point) {
-        super(X,Y,vx,vy,center_point);
+class Pacman extends MoveObject {
+    constructor(X, Y, vx, vy, center_point) {
+        super(X, Y, vx, vy, center_point);
         // this.width = 20;
         // this.height = 20;
-        this.body_radius = wall_size*8/20;
+        this.body_radius = wall_size * 8 / 20;
         this.start_angle = 0.15;
         this.finish_angle = 1.85;
         this.next_vx = 0;
         this.next_vy = 0;
     }
 
-    update() {       
+    update() {
         // if (this.Y + this.vx > board.wall_size) {
-        
-        if(this.collisionDetection()) {
+
+        if (this.collisionDetection()) {
             this.vx = 0;
             this.vy = 0;
         }
-        if (!this.checkForTurnCollision(this.next_vx,this.next_vy)){ // true - false 
+        if (!this.checkForTurnCollision(this.next_vx, this.next_vy)) { // true - false 
             this.vx = this.next_vx;
             this.vy = this.next_vy;
             this.changeDirection(this.vx, this.vy);
-        } 
+        }
         this.X += this.vx;
         this.Y += this.vy;
-        this.locationOngrid =  board.getLocation([this.X,this.Y]); //return the last location accurate on grid [x,y]
-        
+        this.locationOngrid = board.getLocation([this.X, this.Y]); //return the last location accurate on grid [x,y]
+
     }
 
     setVelocity(vx, vy) {
-        this.locationOngrid =  board.getLocation([this.X,this.Y]);
+        this.locationOngrid = board.getLocation([this.X, this.Y]);
         this.next_vx = vx;
         this.next_vy = vy;
     }

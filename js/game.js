@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
-var wall_size = 14 ;
+var wall_size = 18;
 var canvas_width = 1000;
 var canvas_height = wall_size * 31;
 var scale = window.devicePixelRatio
@@ -19,15 +19,15 @@ var goUp = 'ArrowUp';
 var goDown = 'ArrowDown';
 var goLeft = 'ArrowLeft';
 var goRight = 'ArrowRight';
-var velocity = 2;// 1 or 2 
+var velocity = 2; // 1 or 2 
 var mouth_open_counter = 0;
 
-var board = new Board([canvas.width / 8,0],wall_size);
-var pacman_start = board.getPixel([13,15])
-var pacman = new Pacman(pacman_start[0] +(wall_size/2) ,pacman_start[1]+(wall_size/2),0,0,wall_size/2);
-var blinky = new Ghost(canvas.width / 8 + wall_size,wall_size,0,0,0,0,wall_size,velocity)
-pacman.locationOngrid = board.getLocation([pacman.X,pacman.Y]);
-blinky.locationOngrid = board.getLocation([blinky.X,blinky.Y]);
+var board = new Board([canvas.width / 6, 0], wall_size);
+var pacman_start = board.getPixel([13, 15])
+var pacman = new Pacman(pacman_start[0] + (wall_size / 2), pacman_start[1] + (wall_size / 2), 0, 0, wall_size / 2);
+var blinky = new Ghost(canvas.width / 6 + wall_size, wall_size, 0, 0, 0, 0, wall_size, velocity)
+pacman.locationOngrid = board.getLocation([pacman.X, pacman.Y]);
+blinky.locationOngrid = board.getLocation([blinky.X, blinky.Y]);
 
 function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -42,9 +42,10 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-function resetGame(){
+function resetGame() {
     break_animation = true;
     break_animation = false;
+
 }
 
 window.addEventListener('keydown', function(e) {
@@ -56,4 +57,10 @@ window.addEventListener('keydown', function(e) {
     })
     // board.generateBoard();
 
-
+const reloadtButton = document.querySelector("#reload");
+// Reload everything:
+function reload() {
+    reload = location.reload();
+}
+// Event listeners for reload
+reloadButton.addEventListener("click", reload, false);
