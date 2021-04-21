@@ -4,7 +4,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="./js/jquery-3.4.1.slim.min.js"></script>
-    <script type="text/javascript" src="./js/menu.js"></script>
 </head>
 
 <body>
@@ -13,7 +12,7 @@
     </header>
     <!-- Navigation Bar -->
     <div class="topnav">
-        <a id="#welcome" onclick="menu('welcome');">Welcome</a>
+        <a id="#welcome" onclick="menu('welcome');window.location.reload();">Welcome</a>
         <a id="#register" onclick="menu('register');">Register</a>
         <a id="#login" onclick="menu('login');">Log In</a>
         <a id="#about" onclick="menu('about');">About</a>
@@ -161,12 +160,12 @@
                 </div>
             </div>
             <br>
-            <div>
-                <input id="color1" type="color" style="opacity: 0;" oninput="changeBallColor(this.value,'colorBtn1')" />
+            <div class="color_pickers">
+                <input id="color1" type="color" value="#50FFEB" style="opacity: 0; top: 0px; left: 65px;" oninput="changeBallColor(this.value,'colorBtn1')" />
                 <label class="colorBtn" id="colorBtn1" for="color" style="top: 0px; left: -65px; z-index: -1;">5</label>
-                <input id="color2" type="color" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn2')" />
+                <input id="color2" type="color" value="#FF98EE" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn2')" />
                 <label class="colorBtn" id="colorBtn2" for="color" style="top: 0px; left: -65px; z-index: -1;">15</label>
-                <input id="color3" type="color" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn3')" />
+                <input id="color3" type="color" value="#FF5500" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn3')" />
                 <label class="colorBtn" id="colorBtn3" for="color" style="top: 0px; left: -65px; z-index: -1;">25</label>
             </div>
             <button class="glowing_button" type="submit" onclick="generateRandomSettings()" style="top: 30px;">Random Settings</button>
@@ -176,16 +175,26 @@
         <div class="pacman">
             <div id="game">
                 <canvas id="canvas" width="1920" height="1080"></canvas>
+                <div id="score">
+                    <p id="score_number">0</p>
+                    <!-- <input type="text" id="game_score" value="0" readonly="readonly" style="width:30px; text-align:center"> -->
+                </div>
+                <div id="timer">
+                    <p id="timer_count"></p>
+                    <!-- <input type="text" id="game_score" value="0" readonly="readonly" style="width:30px; text-align:center"> -->
+                </div>
                 <script src="./js/board.js"></script>
                 <script src="./js/MoveObject.js"></script>
                 <script src="./js/pacman.js"></script>
                 <script src="./js/ghost.js"></script>
                 <script src="./js/game.js"></script>
             </div>
+
         </div>
 
     </div>
     <footer>Contact us! &#9993 Ariel Shilo: shiloari@post.bgu.ac.il &#9993 Gal Alkalay: alkalayg@post.bgu.ac.il</footer>
+    <script type="text/javascript" src="./js/menu.js"></script>
 </body>
 
 </html>

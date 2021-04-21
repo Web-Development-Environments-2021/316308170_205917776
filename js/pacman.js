@@ -11,6 +11,15 @@ class Pacman extends MoveObject {
         this.mouth_open = 0;
     }
 
+    checkIfEdge() {
+        if (this.locationOngrid[0] == 27 && this.locationOngrid[1] == 14 && this.vx > 0 && this.vy == 0) {
+            return board.getPixel([0, 14]);
+        } else if (this.locationOngrid[0] == 0 && this.locationOngrid[1] == 14 && this.vx < 0 && this.vy == 0) {
+            return board.getPixel([27, 14]);
+        } else return false;
+    }
+
+
     update() {
         // if (this.Y + this.vx > board.wall_size) {
 
@@ -23,13 +32,34 @@ class Pacman extends MoveObject {
             this.vy = this.next_vy;
             this.changeDirection(this.vx, this.vy);
         }
+        let check_if_edge = this.checkIfEdge(); //check if teleport pacman to other side.
+        if (check_if_edge != false) {
+            this.X = check_if_edge[0] + pacman.body_radius + 2;
+            this.Y = check_if_edge[1] + pacman.body_radius + 2;
+        }
         this.X += this.vx;
         this.Y += this.vy;
+        let prev_location = this.locationOngrid;
         this.locationOngrid = board.getLocation([this.X, this.Y]); //return the last location accurate on grid [x,y]
-        if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 1) {
+        if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 4) {
             grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
-            console.log('eat')
+            document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 5;
+        } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 5) {
+            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
+            document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 15;
+        } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 6) {
+            document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 25;
+            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
+        } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 9) {
+            blinky.setVelocity(blinky.velocity / 4)
+            setTimeout(function fix_ghost_velocity() {
+                blinky.setVelocity(blinky.velocity)
+            }, 4000)
+            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
         }
+        grid[prev_location[1]][prev_location[0]] = 0;
+        grid[this.locationOngrid[1]][this.locationOngrid[0]] = 1;
+
     }
 
     setVelocity(vx, vy) {

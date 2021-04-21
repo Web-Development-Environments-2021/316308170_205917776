@@ -3,6 +3,7 @@ class Ghost extends MoveObject {
         super(X, Y, vx, vy, 0);
         this.diff_level = 1;
         this.timer = 0;
+        this.velocity = velocity
         this.current_pacman_path = []
         this.img_locations = {
             "up": [sx + 190, sy],
@@ -13,45 +14,48 @@ class Ghost extends MoveObject {
         this.direction = this.img_locations["right"];
         this.size = size;
         this.move_direction = {
-            "up": [0, -velocity],
-            "down": [0, velocity],
-            "left": [-velocity, 0],
-            "right": [velocity, 0]
+            "up": [0, -this.velocity],
+            "down": [0, this.velocity],
+            "left": [-this.velocity, 0],
+            "right": [this.velocity, 0]
         }
+        this.current_val = 2;
+        this.next_val = 0;
+        this.prev_val = 0;
     }
 
     isValidCoordinate(x, y, current_path) {
         return x >= 0 && y >= 0 && x < board.length && y < board.length && board[x][y] == 0 && !([x, y] in current_path);
     }
 
-    find_path_to_pacman(pacman_location) {
-        let queue = []
-        queue.push([this.locationOngrid]);
-        while (queue.length != 0) {
-            let current_path = queue.shift(); //get current path
-            // console.log(current_path)
-            let coordinate = current_path[current_path.length - 1] // get last coordinate
-                // console.log(coordinate)
-            if (coordinate == [pacman_location[0], pacman_location[1]]) { //found pacman
-                console.log("found path!")
-                return current_path[1]; //neighbor to move to
-            }
-            let x_coor = coordinate[0];
-            let y_coor = coordinate[1];
-            if (this.isValidCoordinate(x_coor + 1, y_coor, current_path)) queue.push(current_path.concat([
-                [x_coor + 1, y_coor]
-            ]))
-            if (this.isValidCoordinate(x_coor - 1, y_coor, current_path)) queue.push(current_path.concat([
-                [x_coor - 1, y_coor]
-            ]))
-            if (this.isValidCoordinate(x_coor, y_coor + 1, current_path)) queue.push(current_path.concat([
-                [x_coor, y_coor + 1]
-            ]))
-            if (this.isValidCoordinate(x_coor, y_coor - 1, current_path)) queue.push(current_path.concat([
-                [x_coor, y_coor - 1]
-            ]))
-        }
-    }
+    // find_path_to_pacman(pacman_location) {
+    //     let queue = []
+    //     queue.push([this.locationOngrid]);
+    //     while (queue.length != 0) {
+    //         let current_path = queue.shift(); //get current path
+    //         // console.log(current_path)
+    //         let coordinate = current_path[current_path.length - 1] // get last coordinate
+    //             // console.log(coordinate)
+    //         if (coordinate == [pacman_location[0], pacman_location[1]]) { //found pacman
+    //             // console.log("found path!")
+    //             return current_path[1]; //neighbor to move to
+    //         }
+    //         let x_coor = coordinate[0];
+    //         let y_coor = coordinate[1];
+    //         if (this.isValidCoordinate(x_coor + 1, y_coor, current_path)) queue.push(current_path.concat([
+    //             [x_coor + 1, y_coor]
+    //         ]))
+    //         if (this.isValidCoordinate(x_coor - 1, y_coor, current_path)) queue.push(current_path.concat([
+    //             [x_coor - 1, y_coor]
+    //         ]))
+    //         if (this.isValidCoordinate(x_coor, y_coor + 1, current_path)) queue.push(current_path.concat([
+    //             [x_coor, y_coor + 1]
+    //         ]))
+    //         if (this.isValidCoordinate(x_coor, y_coor - 1, current_path)) queue.push(current_path.concat([
+    //             [x_coor, y_coor - 1]
+    //         ]))
+    //     }
+    // }
 
     calc_manhatten_dist(pacman_location, i, j) {
         let coor_x = pacman_location[0];
@@ -59,9 +63,7 @@ class Ghost extends MoveObject {
         return Math.abs(this.locationOngrid[0] + i) - coor_x + Math.abs(this.locationOngrid[1] + j) - coor_y;
     }
 
-    update() {
-        // let neighbor = this.find_path_to_pacman(pacman.locationOngrid)
-        // get directions by order - best to worst
+    next_move() {
         let random_condition = Math.random() < (this.diff_level / (this.diff_level + 1))
         if ((!this.checkForTurnCollision(this.vx, this.vy) && random_condition) || this.collisionDetection()) {
             if (this.timer > 40) {
@@ -69,7 +71,6 @@ class Ghost extends MoveObject {
                 this.timer = 0;
             }
             this.timer++;
-            console.log(this.diff_level / (this.diff_level + 1))
             let distance = Number.MAX_SAFE_INTEGER;
             var best_direction = "";
             for (var key in this.move_direction) {
@@ -88,9 +89,42 @@ class Ghost extends MoveObject {
                 this.changeDirection(this.vx, this.vy)
             }
         }
+    }
+
+    setVelocity(velocity) {
+        this.move_direction = {
+            "up": [0, -velocity],
+            "down": [0, velocity],
+            "left": [-velocity, 0],
+            "right": [velocity, 0]
+        }
+    }
+
+    update() {
+        // let neighbor = this.find_path_to_pacman(pacman.locationOngrid)
+        // get directions by order - best to worst
+        this.next_move();
+        let current_location = this.locationOngrid;
         this.X += this.vx;
         this.Y += this.vy;
+        let next_location = board.getLocation([this.X, this.Y]);
+        if (current_location != this.next_location) {
+            if (grid[next_location[1]][next_location[0]] == 1) { //got pacman!
+                // alert('got pacman!');
+            }
+            grid[current_location[1]][current_location[0]] = this.prev_val;
+            this.prev_val = grid[next_location[1]][next_location[0]];
+            if (!(grid[next_location[1]][next_location[0]] == 4 || //if is food, don't override it.
+                    grid[next_location[1]][next_location[0]] == 5 ||
+                    grid[next_location[1]][next_location[0]] == 6)) {
+                grid[next_location[1]][next_location[0]] = 2;
+            }
+
+        }
+        // let prev_value = grid[prev_location[1]][prev_location[0]]
+
         this.locationOngrid = board.getLocation([this.X, this.Y]); //return the last location accurate on grid [x,y]
+        // grid[prev_location[1]][prev_location[0]] = prev_value;
     }
 
 

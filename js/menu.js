@@ -82,22 +82,31 @@ function generateRandomSettings() {
     document.getElementById('slider_bar_balls').value = balls;
     document.getElementById('slider_bar_monsters').value = monsters;
     document.getElementById('slider_bar_time').value = time;
+    document.getElementById('color1').value = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6)
+    changeBallColor(document.getElementById('color1').value, 'colorBtn1')
+    document.getElementById('color2').value = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6)
+    changeBallColor(document.getElementById('color2').value, 'colorBtn2')
+    document.getElementById('color3').value = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6)
+    changeBallColor(document.getElementById('color3').value, 'colorBtn3')
 }
 
 
 function changeBallColor(color, ball_id) {
     document.getElementById(ball_id).style.backgroundColor = color;
+    if (isLightColor(color)) document.getElementById(ball_id).style.color = '#000000';
+    else document.getElementById(ball_id).style.color = '#FFFFFF';
 }
 
 
 function menu(nav) {
     hide();
     $('.' + nav).show();
-    if(nav == 'pacman') {
+    if (nav == 'pacman') {
         $('#canvas').show();
+        $('#score').show();
+        $('#timer').show();
         animate();
-    }
-    else{
+    } else {
         resetGame();
     }
 };
@@ -112,3 +121,59 @@ function hide() {
     $('#canvas').hide();
     // resetGame();
 };
+
+
+function isLightColor(color) {
+
+    // Variables for red, green, blue values
+    var r, g, b, hsp;
+
+    // Check the format of the color, HEX or RGB?
+    if (color.match(/^rgb/)) {
+
+        // If RGB --> store the red, green, blue values in separate variables
+        color = color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+
+        r = color[1];
+        g = color[2];
+        b = color[3];
+    } else {
+
+        // If hex --> Convert it to RGB: http://gist.github.com/983661
+        color = +("0x" + color.slice(1).replace(
+            color.length < 5 && /./g, '$&$&'));
+
+        r = color >> 16;
+        g = color >> 8 & 255;
+        b = color & 255;
+    }
+
+    // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
+    hsp = Math.sqrt(
+        0.299 * (r * r) +
+        0.587 * (g * g) +
+        0.114 * (b * b)
+    );
+
+    // Using the HSP value, determine whether the color is light or dark
+    if (hsp > 127.5) {
+
+        return true;
+    } else {
+
+        return false;
+    }
+}
+
+var color_of_5_balls = document.getElementById('color1').value;
+var color_of_15_balls = document.getElementById('color2').value;
+var color_of_25_balls = document.getElementById('color3').value;
+document.getElementById('colorBtn1').style.background = color_of_5_balls;
+document.getElementById('colorBtn2').style.background = color_of_15_balls;
+document.getElementById('colorBtn3').style.background = color_of_25_balls;
+if (isLightColor(color_of_5_balls)) document.getElementById('colorBtn1').style.color = '#000000';
+else document.getElementById('colorBtn1').style.color = '#FFFFFF';
+if (isLightColor(color_of_15_balls)) document.getElementById('colorBtn2').style.color = '#000000';
+else document.getElementById('colorBtn2').style.color = '#FFFFFF';
+if (isLightColor(color_of_25_balls)) document.getElementById('colorBtn3').style.color = '#000000';
+else document.getElementById('colorBtn3').style.color = '#FFFFFF';
