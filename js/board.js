@@ -122,12 +122,22 @@ class Board {
                 } else if (grid[i][j] == 9) {
                     let pixel_xy = this.getPixel([j, i])
                     context.beginPath();
-                    context.arc(pixel_xy[0] + pacman.body_radius + 2, pixel_xy[1] + pacman.body_radius + 2, pacman.body_radius - this.sour_sweet_candy_size / 40, 0 * Math.PI, 2 * Math.PI); // full circle
+                    context.arc(pixel_xy[0] + pacman.body_radius + 2, pixel_xy[1] + pacman.body_radius + 2, pacman.body_radius - this.sour_sweet_candy_size / 25, 0 * Math.PI, 2 * Math.PI); // full circle
                     context.lineTo(this.X, this.Y);
                     context.fillStyle = "#37FF00"; //color
                     context.fill();
                     context.lineWidth = 2;
                     context.strokeStyle = "pink";
+                    context.stroke();
+                } else if (grid[i][j] == 10) {
+                    let pixel_xy = this.getPixel([j, i])
+                    context.beginPath();
+                    context.arc(pixel_xy[0] + pacman.body_radius + 2, pixel_xy[1] + pacman.body_radius + 2, pacman.body_radius - this.sour_sweet_candy_size / 25, 0 * Math.PI, 2 * Math.PI); // full circle
+                    context.lineTo(this.X, this.Y);
+                    context.fillStyle = "#FF0023"; //color
+                    context.fill();
+                    context.lineWidth = 2;
+                    context.strokeStyle = "yellow";
                     context.stroke();
                 }
             }
@@ -142,7 +152,7 @@ class Board {
             (i > 4 * grid.length / 5 && j > 4 * grid.length / 5)
     }
 
-    generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies) {
+    generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy) {
         for (let i = 0; i < grid.length; i++) {
             for (let j = 0; j < grid[0].length; j++) {
                 // generate 5 points ball
@@ -165,6 +175,9 @@ class Board {
                 } else if (grid[i][j] == 0 && this.isCorner(i, j) && num_of_sour_sweet_candies > 0 && Math.random() < 0.01) {
                     grid[i][j] = 9;
                     num_of_sour_sweet_candies--;
+                } else if (grid[i][j] == 0 && this.isCorner(i, j) && num_of_ghost_candy > 0 && Math.random() < 0.01) {
+                    grid[i][j] = 10;
+                    num_of_ghost_candy--;
                 }
                 // handle the remainder of balls from the Math.floor() - put 5 points balls.
                 else if (grid[i][j] == 0 && balls_remain > 0 && num_of_5_balls == 0 &&
@@ -175,6 +188,6 @@ class Board {
                 }
             }
         }
-        if (balls_remain > 0) this.generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies);
+        if (balls_remain > 0) this.generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
     }
 }

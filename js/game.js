@@ -21,38 +21,90 @@ var goLeft = 'ArrowLeft';
 var goRight = 'ArrowRight';
 var velocity = 1.5; // 1 or 2 
 var ghost_velocity = velocity - 0.5
+var ghost_center = 20;
 var mouth_open_counter = 0;
 var num_of_seconds;
 var timer_count = 0;
 var strikes = 5;
 var got_pacman = false;
 var board = new Board([canvas.width / 6, 0], wall_size);
-var pacman_start = board.getPixel([12, 15])
+
+function generateRandomPosition() {
+    let i = 5 + Math.floor(Math.random() * (grid.length - 10))
+    let j = 5 + Math.floor(Math.random() * (grid[0].length - 10))
+    if (grid[j][i] != 0) return generateRandomPosition();
+    else return [i, j]
+}
+
+var pacman_start = board.getPixel(generateRandomPosition())
 var pacman = new Pacman(pacman_start[0] + (wall_size / 2), pacman_start[1] + (wall_size / 2), 0, 0, wall_size / 2);
-var blinky = new Ghost(canvas.width / 6 + wall_size, wall_size, ghost_velocity, 0, 0, 0, wall_size, ghost_velocity);
 pacman.locationOngrid = board.getLocation([pacman.X, pacman.Y]);
-blinky.locationOngrid = board.getLocation([blinky.X, blinky.Y]);
+
+var red_ghost_start = board.getPixel([1, 1])
+var red_ghost = new Ghost(red_ghost_start[0], red_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size, ghost_velocity);
+red_ghost.locationOngrid = board.getLocation([red_ghost.X, red_ghost.Y]);
+
+var pink_ghost_start = board.getPixel([1, 29])
+var pink_ghost = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 380, wall_size, ghost_velocity);
+pink_ghost.locationOngrid = board.getLocation([pink_ghost.X, pink_ghost.Y]);
+
+var orange_ghost_start = board.getPixel([26, 1])
+var orange_ghost = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 380, wall_size, ghost_velocity);
+orange_ghost.locationOngrid = board.getLocation([orange_ghost.X, orange_ghost.Y]);
+
+var blue_ghost_start = board.getPixel([26, 29])
+var blue_ghost = new Ghost(blue_ghost_start[0], blue_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size, ghost_velocity);
+blue_ghost.locationOngrid = board.getLocation([blue_ghost.X, blue_ghost.Y]);
+
+var ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost] //should be random
+
+
 
 function setGameValues() {
     var num_of_balls = document.getElementById('slider_value_balls').value;
     var num_of_ghosts = document.getElementById('slider_value_monsters').value;
+    // remove random shots - depends on num_of_ghosts given.
+    for (let i = 0; i < 4 - num_of_ghosts; i++) {
+        random_index = Math.floor(Math.random() * (4 - i))
+        ghosts.splice(random_index, 1)
+    }
     num_of_seconds = document.getElementById('slider_value_time').value;
     var num_of_sour_sweet_candies = 2;
+    var num_of_ghost_candy = 2;
     var num_of_5_balls = Math.floor(0.6 * num_of_balls);
     var num_of_15_balls = Math.floor(0.3 * num_of_balls);
     var num_of_25_balls = Math.floor(0.1 * num_of_balls);
     color_of_5_balls = document.getElementById('color1').value;
     color_of_15_balls = document.getElementById('color2').value;
     color_of_25_balls = document.getElementById('color3').value;
+    document.getElementById('color1_game').value = document.getElementById('color1').value;
+    document.getElementById('color2_game').value = document.getElementById('color2').value;
+    document.getElementById('color3_game').value = document.getElementById('color3').value;
     document.getElementById('colorBtn1_game').style.background = color_of_5_balls;
     document.getElementById('colorBtn2_game').style.background = color_of_15_balls;
     document.getElementById('colorBtn3_game').style.background = color_of_25_balls;
     document.getElementById('timer_count').innerHTML = num_of_seconds;
     if (isLightColor(color_of_5_balls)) document.getElementById('colorBtn1').style.color = '#000000';
     else document.getElementById('colorBtn1').style.color = '#FFFFFF';
-    board.generateRandomBalls(num_of_balls, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies);
+    board.generateRandomBalls(num_of_balls, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
 
 
+}
+
+function checkIfCrash(ghost) {
+    if (pacman.locationOngrid[0] == ghost.locationOngrid[0] && pacman.locationOngrid[1] == ghost.locationOngrid[1]) {
+        document.getElementById('life' + strikes).style.display = "none";
+        strikes--;
+        document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) - 10;
+        for (let i = 0; i < ghosts.length; i++) {
+            let curr_ghost = ghosts[i]
+            grid[curr_ghost.locationOngrid[1]][curr_ghost.locationOngrid[0]] = 0;
+            curr_ghost.resetLocation();
+        }
+        grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
+        pacman.resetLocation();
+        alert('got pacman!');
+    }
 }
 
 function animate() {
@@ -60,8 +112,11 @@ function animate() {
     board.draw();
     pacman.update();
     pacman.draw();
-    blinky.update();
-    blinky.draw();
+    for (let i = 0; i < ghosts.length; i++) {
+        ghosts[i].update();
+        ghosts[i].draw();
+        checkIfCrash(ghosts[i]);
+    }
     if (timer_count > 60) {
         num_of_seconds--;
         document.getElementById('timer_count').innerHTML = num_of_seconds;

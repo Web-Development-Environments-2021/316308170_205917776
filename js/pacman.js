@@ -1,6 +1,8 @@
 class Pacman extends MoveObject {
     constructor(X, Y, vx, vy, center_point) {
         super(X, Y, vx, vy, center_point);
+        this.original_X = X;
+        this.original_Y = Y;
         // this.width = 20;
         // this.height = 20;
         this.body_radius = wall_size * 8 / 20;
@@ -19,10 +21,21 @@ class Pacman extends MoveObject {
         } else return false;
     }
 
+    resetLocation() {
+        this.locationOngrid = generateRandomPosition();
+        let pixel_xy = board.getPixel(this.locationOngrid)
+        this.X = pixel_xy[0] + (wall_size / 2);
+        this.Y = pixel_xy[1] + (wall_size / 2);
+        this.vx = 0;
+        this.vy = 0;
+        this.next_vx = 0;
+        this.next_vy = 0;
+        grid[this.locationOngrid[1]][this.locationOngrid[0]] = 1;
+    }
 
     update() {
         // if (this.Y + this.vx > board.wall_size) {
-
+        if (got_pacman) return
         if (this.collisionDetection()) {
             this.vx = 0;
             this.vy = 0;
@@ -40,25 +53,37 @@ class Pacman extends MoveObject {
         this.Y += this.vy;
         let prev_location = this.locationOngrid;
         this.locationOngrid = board.getLocation([this.X, this.Y]); //return the last location accurate on grid [x,y]
-        if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 4) {
-            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
-            document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 5;
-        } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 5) {
-            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
-            document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 15;
-        } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 6) {
-            document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 25;
-            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
-        } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 9) {
-            blinky.setVelocity(blinky.velocity / 4)
-            setTimeout(function fix_ghost_velocity() {
-                blinky.setVelocity(blinky.velocity)
-            }, 4000)
-            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
+        if (!(prev_location[0] == this.locationOngrid[0] && prev_location[1] == this.locationOngrid[1])) {
+            if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 4) {
+                // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
+                document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 5;
+            } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 5) {
+                // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
+                document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 15;
+            } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 6) {
+                document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 25;
+                // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
+            } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 9) {
+                for (let i = 0; i < ghosts.length; i++) {
+                    ghosts[i].setVelocity(ghosts[i].velocity / 4)
+                    setTimeout(function fix_ghost_velocity() {
+                        ghosts[i].setVelocity(ghosts[i].velocity)
+                    }, 4000)
+                }
+                // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
+            } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 10) {
+                if (Math.random() < 0.5) {
+                    random_index = Math.floor(Math.random() * (ghosts.length))
+                    ghosts.splice(random_index, 1)
+                } else {
+                    let new_ghosts = [red_ghost, pink_ghost, orange_ghost, blue_ghost]
+                    random_index = Math.floor(Math.random() * (new_ghosts.length))
+                    ghosts.push(new_ghosts[random_index])
+                }
+            }
+            grid[prev_location[1]][prev_location[0]] = 0;
+            grid[this.locationOngrid[1]][this.locationOngrid[0]] = 1;
         }
-        grid[prev_location[1]][prev_location[0]] = 0;
-        grid[this.locationOngrid[1]][this.locationOngrid[0]] = 1;
-
     }
 
     setVelocity(vx, vy) {

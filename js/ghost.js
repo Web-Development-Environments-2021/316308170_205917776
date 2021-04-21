@@ -1,6 +1,10 @@
 class Ghost extends MoveObject {
     constructor(X, Y, vx, vy, sx, sy, size, velocity) {
         super(X, Y, vx, vy, 0);
+        this.original_X = X;
+        this.original_Y = Y;
+        this.original_vx = vx;
+        this.original_vy = vy;
         this.diff_level = 1;
         this.timer = 0;
         this.velocity = velocity
@@ -71,6 +75,15 @@ class Ghost extends MoveObject {
         }
     }
 
+    resetLocation() {
+        this.X = this.original_X;
+        this.Y = this.original_Y;
+        this.vx = this.original_vx;
+        this.vy = this.original_vy;
+        this.locationOngrid = board.getLocation([this.X, this.Y]);
+        grid[this.locationOngrid[1]][this.locationOngrid[0]] = 2;
+    }
+
     update() {
         // let neighbor = this.find_path_to_pacman(pacman.locationOngrid)
         // get directions by order - best to worst
@@ -79,26 +92,19 @@ class Ghost extends MoveObject {
         this.X += this.vx;
         this.Y += this.vy;
         let next_location = board.getLocation([this.X, this.Y]);
-        if (current_location != this.next_location) {
-            if (grid[next_location[1]][next_location[0]] == 1) { //got pacman!
-                // alert('got pacman!');
-                this.vx = 0;
-                this.vy = 0;
-                if (!got_pacman) {
-                    got_pacman = true;
-                    document.getElementById('life' + strikes).style.display = "none";
-                    strikes--;
-                    this.velocity = 2;
-                    setTimeout(function lose_life() {
-                        pacman.X = pacman_start[0] + (wall_size / 2)
-                        pacman.Y = pacman_start[1] + (wall_size / 2)
-                        got_pacman = false;
-                        this.vx = this.velocity;
-                        this.vy = this.velocity;
-                        console.log(this.velocity)
-                    }, 2000)
-                }
-            }
+        if (!(current_location[0] == next_location[0] && current_location[1] == next_location[1])) {
+            // if (grid[next_location[1]][next_location[0]] == 1 && !got_pacman) { //got pacman! 
+            //     got_pacman = true;
+            //     document.getElementById('life' + strikes).style.display = "none";
+            //     strikes--;
+            //     alert('got pacman!');
+            //     grid[next_location[1]][next_location[0]] = 0;
+            //     grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
+            //     pacman.resetLocation();
+            //     this.resetLocation();
+            //     got_pacman = false;
+            //     return
+            // }
             grid[current_location[1]][current_location[0]] = this.prev_val;
             this.prev_val = grid[next_location[1]][next_location[0]];
             if (!(grid[next_location[1]][next_location[0]] == 4 || //if is food, don't override it.
