@@ -93,6 +93,9 @@ function generateRandomSettings() {
 
 function changeBallColor(color, ball_id) {
     document.getElementById(ball_id).style.backgroundColor = color;
+    if (ball_id == 'colorBtn1_game') color_of_5_balls = color;
+    else if (ball_id == 'colorBtn2_game') color_of_15_balls = color;
+    else if (ball_id == 'colorBtn3_game') color_of_25_balls = color;
     if (isLightColor(color)) document.getElementById(ball_id).style.color = '#000000';
     else document.getElementById(ball_id).style.color = '#FFFFFF';
 }
@@ -176,4 +179,13 @@ else document.getElementById('colorBtn1').style.color = '#FFFFFF';
 if (isLightColor(color_of_15_balls)) document.getElementById('colorBtn2').style.color = '#000000';
 else document.getElementById('colorBtn2').style.color = '#FFFFFF';
 if (isLightColor(color_of_25_balls)) document.getElementById('colorBtn3').style.color = '#000000';
+else document.getElementById('colorBtn3').style.color = '#FFFFFF';
+document.getElementById('colorBtn1_game').style.background = color_of_5_balls;
+document.getElementById('colorBtn2_game').style.background = color_of_15_balls;
+document.getElementById('colorBtn3_game').style.background = color_of_25_balls;
+if (isLightColor(color_of_5_balls)) document.getElementById('colorBtn1_game').style.color = '#000000';
+else document.getElementById('colorBtn1').style.color = '#FFFFFF';
+if (isLightColor(color_of_15_balls)) document.getElementById('colorBtn2_game').style.color = '#000000';
+else document.getElementById('colorBtn2').style.color = '#FFFFFF';
+if (isLightColor(color_of_25_balls)) document.getElementById('colorBtn3_game').style.color = '#000000';
 else document.getElementById('colorBtn3').style.color = '#FFFFFF';

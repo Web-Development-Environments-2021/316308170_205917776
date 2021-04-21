@@ -136,7 +136,10 @@ class Board {
     }
 
     isCorner(i, j) {
-        return (i < 5 && j < 5) || (i < 5 && j > 20) || (i > 20 && j < 5) || (i > 20 && j > 20)
+        return (i < grid.length / 5 && j < grid.length / 5) ||
+            (i < grid.length / 5 && j > 4 * grid.length / 5) ||
+            (i > 4 * grid.length / 5 && j < grid.length / 5) ||
+            (i > 4 * grid.length / 5 && j > 4 * grid.length / 5)
     }
 
     generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies) {

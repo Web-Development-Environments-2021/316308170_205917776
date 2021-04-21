@@ -34,8 +34,7 @@ class Pacman extends MoveObject {
         }
         let check_if_edge = this.checkIfEdge(); //check if teleport pacman to other side.
         if (check_if_edge != false) {
-            this.X = check_if_edge[0] + pacman.body_radius + 2;
-            this.Y = check_if_edge[1] + pacman.body_radius + 2;
+            this.X = check_if_edge[0];
         }
         this.X += this.vx;
         this.Y += this.vy;

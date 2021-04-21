@@ -13,6 +13,7 @@ ghost_img.src = "./images/ghosts.png"
 
 // ghost sprite size (160,160) space (30), space to other ghost (50,30)
 
+
 var break_animation = false;
 var goUp = 'ArrowUp';
 var goDown = 'ArrowDown';
@@ -23,6 +24,8 @@ var ghost_velocity = velocity - 0.5
 var mouth_open_counter = 0;
 var num_of_seconds;
 var timer_count = 0;
+var strikes = 5;
+var got_pacman = false;
 var board = new Board([canvas.width / 6, 0], wall_size);
 var pacman_start = board.getPixel([12, 15])
 var pacman = new Pacman(pacman_start[0] + (wall_size / 2), pacman_start[1] + (wall_size / 2), 0, 0, wall_size / 2);
@@ -41,9 +44,9 @@ function setGameValues() {
     color_of_5_balls = document.getElementById('color1').value;
     color_of_15_balls = document.getElementById('color2').value;
     color_of_25_balls = document.getElementById('color3').value;
-    document.getElementById('colorBtn1').style.background = color_of_5_balls;
-    document.getElementById('colorBtn2').style.background = color_of_15_balls;
-    document.getElementById('colorBtn3').style.background = color_of_25_balls;
+    document.getElementById('colorBtn1_game').style.background = color_of_5_balls;
+    document.getElementById('colorBtn2_game').style.background = color_of_15_balls;
+    document.getElementById('colorBtn3_game').style.background = color_of_25_balls;
     document.getElementById('timer_count').innerHTML = num_of_seconds;
     if (isLightColor(color_of_5_balls)) document.getElementById('colorBtn1').style.color = '#000000';
     else document.getElementById('colorBtn1').style.color = '#FFFFFF';
@@ -72,6 +75,7 @@ function animate() {
 function resetGame() {
     break_animation = true;
     break_animation = false;
+
 
 }
 

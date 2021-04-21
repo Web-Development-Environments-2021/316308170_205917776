@@ -28,35 +28,6 @@ class Ghost extends MoveObject {
         return x >= 0 && y >= 0 && x < board.length && y < board.length && board[x][y] == 0 && !([x, y] in current_path);
     }
 
-    // find_path_to_pacman(pacman_location) {
-    //     let queue = []
-    //     queue.push([this.locationOngrid]);
-    //     while (queue.length != 0) {
-    //         let current_path = queue.shift(); //get current path
-    //         // console.log(current_path)
-    //         let coordinate = current_path[current_path.length - 1] // get last coordinate
-    //             // console.log(coordinate)
-    //         if (coordinate == [pacman_location[0], pacman_location[1]]) { //found pacman
-    //             // console.log("found path!")
-    //             return current_path[1]; //neighbor to move to
-    //         }
-    //         let x_coor = coordinate[0];
-    //         let y_coor = coordinate[1];
-    //         if (this.isValidCoordinate(x_coor + 1, y_coor, current_path)) queue.push(current_path.concat([
-    //             [x_coor + 1, y_coor]
-    //         ]))
-    //         if (this.isValidCoordinate(x_coor - 1, y_coor, current_path)) queue.push(current_path.concat([
-    //             [x_coor - 1, y_coor]
-    //         ]))
-    //         if (this.isValidCoordinate(x_coor, y_coor + 1, current_path)) queue.push(current_path.concat([
-    //             [x_coor, y_coor + 1]
-    //         ]))
-    //         if (this.isValidCoordinate(x_coor, y_coor - 1, current_path)) queue.push(current_path.concat([
-    //             [x_coor, y_coor - 1]
-    //         ]))
-    //     }
-    // }
-
     calc_manhatten_dist(pacman_location, i, j) {
         let coor_x = pacman_location[0];
         let coor_y = pacman_location[1];
@@ -111,12 +82,29 @@ class Ghost extends MoveObject {
         if (current_location != this.next_location) {
             if (grid[next_location[1]][next_location[0]] == 1) { //got pacman!
                 // alert('got pacman!');
+                this.vx = 0;
+                this.vy = 0;
+                if (!got_pacman) {
+                    got_pacman = true;
+                    document.getElementById('life' + strikes).style.display = "none";
+                    strikes--;
+                    this.velocity = 2;
+                    setTimeout(function lose_life() {
+                        pacman.X = pacman_start[0] + (wall_size / 2)
+                        pacman.Y = pacman_start[1] + (wall_size / 2)
+                        got_pacman = false;
+                        this.vx = this.velocity;
+                        this.vy = this.velocity;
+                        console.log(this.velocity)
+                    }, 2000)
+                }
             }
             grid[current_location[1]][current_location[0]] = this.prev_val;
             this.prev_val = grid[next_location[1]][next_location[0]];
             if (!(grid[next_location[1]][next_location[0]] == 4 || //if is food, don't override it.
                     grid[next_location[1]][next_location[0]] == 5 ||
-                    grid[next_location[1]][next_location[0]] == 6)) {
+                    grid[next_location[1]][next_location[0]] == 6 ||
+                    grid[next_location[1]][next_location[0]] == 9)) {
                 grid[next_location[1]][next_location[0]] = 2;
             }
 
@@ -146,34 +134,3 @@ class Ghost extends MoveObject {
     }
 
 }
-
-
-// if (!this.checkForTurnCollision(this.vx, this.vy) || this.collisionDetection()) {
-//     let directions = {
-//         "up": this.calc_manhatten_dist(pacman.locationOngrid, -1, 0),
-//         "down": this.calc_manhatten_dist(pacman.locationOngrid, 1, 0),
-//         "right": this.calc_manhatten_dist(pacman.locationOngrid, 0, 1),
-//         "left": this.calc_manhatten_dist(pacman.locationOngrid, 0, -1),
-//     };
-//     let lowestValue = Math.min(...Object.entries(directions).map(o => o[1]));
-//     let key = Object.keys(directions).find(key => directions[key] === lowestValue)
-//         // console.log(key)
-//     switch (key) {
-//         case "up": //up
-//             this.vx = 0;
-//             this.vy = -2;
-//             break;
-//         case "down": //down
-//             this.vx = 0;
-//             this.vy = 2;
-//             break;
-//         case "right": //right
-//             this.vx = 2;
-//             this.vy = 0;
-//             break;
-//         case "left": //left
-//             this.vx = -2;
-//             this.vy = 0;
-//             break;
-//     }
-// }

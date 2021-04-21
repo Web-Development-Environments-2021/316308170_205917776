@@ -161,7 +161,7 @@
             </div>
             <br>
             <div class="color_pickers">
-                <input id="color1" type="color" value="#50FFEB" style="opacity: 0; top: 0px; left: 65px;" oninput="changeBallColor(this.value,'colorBtn1')" />
+                <input id="color1" type="color" value="#50FFEB" style="opacity: 0;" oninput="changeBallColor(this.value,'colorBtn1')" />
                 <label class="colorBtn" id="colorBtn1" for="color" style="top: 0px; left: -65px; z-index: -1;">5</label>
                 <input id="color2" type="color" value="#FF98EE" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn2')" />
                 <label class="colorBtn" id="colorBtn2" for="color" style="top: 0px; left: -65px; z-index: -1;">15</label>
@@ -176,12 +176,29 @@
             <div id="game">
                 <canvas id="canvas" width="1920" height="1080"></canvas>
                 <div id="score">
+                    <p>Score:&nbsp</p>
                     <p id="score_number">0</p>
                     <!-- <input type="text" id="game_score" value="0" readonly="readonly" style="width:30px; text-align:center"> -->
                 </div>
                 <div id="timer">
+                    <p>Time:&nbsp</p>
                     <p id="timer_count"></p>
                     <!-- <input type="text" id="game_score" value="0" readonly="readonly" style="width:30px; text-align:center"> -->
+                </div>
+                <div class="color_pickers_game">
+                    <input id="color1" type="color" value="#50FFEB" style="opacity: 0;" oninput="changeBallColor(this.value,'colorBtn1_game')" />
+                    <label class="colorBtn_game" id="colorBtn1_game" for="color" style="left: -35px; z-index: -1;">5</label>
+                    <input id="color2" type="color" value="#FF98EE" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn2_game')" />
+                    <label class="colorBtn_game" id="colorBtn2_game" for="color" style="left: -35px; z-index: -1;">15</label>
+                    <input id="color3" type="color" value="#FF5500" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn3_game')" />
+                    <label class="colorBtn_game" id="colorBtn3_game" for="color" style="left:-35px; z-index:-1;">25</label>
+                </div>
+                <div class="lives">
+                    <img id="life1" src="./images/heart.png" style="width: 8%; height: auto;">
+                    <img id="life2" src="./images/heart.png" style="width: 8%; height: auto;">
+                    <img id="life3" src="./images/heart.png" style="width: 8%; height: auto;">
+                    <img id="life4" src="./images/heart.png" style="width: 8%; height: auto;">
+                    <img id="life5" src="./images/heart.png" style="width: 8%; height: auto;">
                 </div>
                 <script src="./js/board.js"></script>
                 <script src="./js/MoveObject.js"></script>
