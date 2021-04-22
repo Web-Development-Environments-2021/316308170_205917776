@@ -5,6 +5,141 @@ var key_left = "ArrowLeft";
 var key_right = "ArrowRight";
 var key_is_pressed = false
 var key_buttons = document.getElementsByName('key_button');
+var users_DB = new Map([["k",["k","k k","k@k.com","1/1/95"]]]) // user & passwords dictionary {user : [password,fullname,email,birthday]}
+var online_user = "";
+
+// for gal wanted to add set for mail's and check all the other things 
+// need to remove login skip after finish the game ( onclick(main(..))
+
+$(document).ready(function () {
+
+	// register validation
+	$("#register_form").validate({
+		rules: {
+			username: {
+				required: true,
+				validUsername: true,
+                maxlength : 20
+			},
+			password: {
+				required: true,
+                minlength : 6,
+                maxlength : 20,
+				strongPassword: true
+			},
+			full_name: {
+				required: true,
+				lettersonly: true,
+                maxlength : 50
+			},
+			email: {
+				required: true,
+				email: true,
+                maxlength : 50
+			},
+			birthdate: {
+				required: true
+			}
+		},
+		messages: {
+			username: {
+				required: "Please enter valid username",
+				validUsername: "Username already taken",
+                maxlength : "Username max length is 20"
+			},
+			password: {
+				required: "Please enter an password",
+				strongPassword: "Password MUST contain at least one character and one number",
+                minlength : "Password too short, minimum 6 characters",
+                maxlength :"Password too long, maximum 20 characters",
+			},
+			full_name: {
+				required: "Please enter a name",
+				lettersonly: "Full name can be only letters",
+                maxlength :"Fullname too long, maximum 50 characters"
+			},
+			email: {
+				required: "Please enter an email address",
+				email: "Please enter a valid email",
+                maxlength :"Email too long, maximum 50 characters"
+			},
+			birthdate: {
+				required: "Please enter a birthday"
+			}
+		},
+		submitHandler: function () {
+            alert("registered successfully :D !")
+            let t_username = document.getElementById("r_username").value;
+	        let t_password = document.getElementById("r_password").value;
+            let t_fullname = document.getElementById("r_full_name").value;
+	        let t_email = document.getElementById("r_email").value;
+            let t_birthdate = document.getElementById("r_birthdate").value;
+            users_DB.set(t_username,[t_password,t_fullname,t_email,t_birthdate]);
+            menu('login')      
+			cleatText('register');
+		},
+	});
+
+	//login validation
+	$("#login_form").validate({
+		rules: {
+			username: {
+				required: true,
+			},
+			password: {
+				required: true,
+				validUser: true
+			}
+		},
+		messages: {
+			username: {
+				required: "Please enter username"
+			},
+			password: {
+				required: "Please enter an password",
+				validUser: "Username or password is not valid"
+			}
+		},
+		submitHandler: function () {
+            online_user = document.getElementById("l_username").value; // if not working cuz of double name id
+            menu('settings')      
+			cleatText('login');
+		},
+	});
+
+
+});
+$(function() {
+
+	// register check
+	$.validator.addMethod('strongPassword', function (value, element) {
+		return this.optional(element) ||
+			value.length >= 6 &&
+			/\d/.test(value) &&
+			/[a-z]/i.test(value);
+	});
+
+	$.validator.addMethod('validUsername', function (newUser) {
+		return !(users_DB.has(newUser));
+	});
+
+     // login check
+     $.validator.addMethod('validUser', function (password) {  /// was password,element (if not work have to be elemet too)
+		let username_input = document.getElementById("l_username").value;
+        let user_password = users_DB[username_input]; // password of the user
+		if(user_password != null && user_password[0] === password) { 
+			return true;
+		}
+        cleatText('login');
+        return false;
+	});
+
+});
+
+function cleatText(form){
+    let validator = $("#"+form +'_form').validate();
+    validator.resetForm();
+}
 
 function disableOtherButtons(activeButton) {
     for (let i = 0; i < key_buttons.length; i++) {
