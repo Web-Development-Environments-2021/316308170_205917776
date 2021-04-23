@@ -36,7 +36,7 @@
                         <label for="username">Username:</label>
                     </div>
                     <div class="field_right">
-                        <input type="text" placeholder="Username" name="username" id="r_username" >
+                        <input type="text" placeholder="Username" name="username" id="r_username">
                     </div>
                 </div>
                 <div class="password">
@@ -44,7 +44,7 @@
                         <label for="password">Password:</label>
                     </div>
                     <div class="field_right">
-                        <input type="password" placeholder="Password" name="password" id="r_password" >
+                        <input type="password" placeholder="Password" name="password" id="r_password">
                     </div>
                 </div>
                 <div class="full_name">
@@ -52,7 +52,7 @@
                         <label for="full_name">Full Name:</label>
                     </div>
                     <div class="field_right">
-                        <input type="text" placeholder="Full Name" name="full_name" id="r_full_name" >
+                        <input type="text" placeholder="Full Name" name="full_name" id="r_full_name">
                     </div>
                 </div>
                 <div class="email">
@@ -60,7 +60,7 @@
                         <label for="email">Email:</label>
                     </div>
                     <div class="field_right">
-                        <input type="email" placeholder="Email" name="email" id="r_email" >
+                        <input type="email" placeholder="Email" name="email" id="r_email">
                     </div>
                 </div>
                 <div class="birthdate">
@@ -68,36 +68,37 @@
                         <label for="birthdate">Birth Date:</label>
                     </div>
                     <div class="field_right">
-                        <input type="date" placeholder="birthdate" name="birthdate" id="r_birthdate" >
+                        <input type="date" placeholder="birthdate" name="birthdate" id="r_birthdate">
                     </div>
                 </div>
-                <button class="glowing_button" type="submit"  style="top: 30px;">Sign Up</button>
+                <button class="glowing_button" type="submit" style="top: 30px;">Sign Up</button>
             </form>
         </div>
         <!-- Log In div -->
         <div class="login">
             <h1>Log In</h1>
             <form id='login_form'>
-            <div class="username">
-                <div class="text_left">
-                    <label for="username">Username:</label>
+                <div class="username">
+                    <div class="text_left">
+                        <label for="username">Username:</label>
+                    </div>
+                    <div class="field_right">
+                        <input type="text" placeholder="Username" name="username" id="l_username">
+                    </div>
                 </div>
-                <div class="field_right">
-                    <input type="text" placeholder="Username" name="username" id="l_username" >
+                <div class="password">
+                    <div class="text_left">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="field_right">
+                        <input type="password" placeholder="Password" name="password" id="l_password">
+                    </div>
                 </div>
-            </div>
-            <div class="password">
-                <div class="text_left">
-                    <label for="password">Password:</label>
-                </div>
-                <div class="field_right">
-                    <input type="password" placeholder="Password" name="password" id="l_password" >
-                </div>
-            </div>
-            
-            <br>
-            <button class="glowing_button" type="submit" onclick="menu('settings')">Log In</button> <!-- remove onclick -->
-        </form>
+
+                <br>
+                <button class="glowing_button" type="submit" onclick="menu('settings')">Log In</button>
+                <!-- remove onclick -->
+            </form>
         </div>
         <!-- About div -->
         <div class="about">about</div>
@@ -167,11 +168,11 @@
             <br>
             <div class="color_pickers">
                 <input id="color1" type="color" value="#50FFEB" style="opacity: 0;" oninput="changeBallColor(this.value,'colorBtn1')" />
-                <label class="colorBtn" id="colorBtn1" for="color" style="top: 0px; left: -65px; z-index: -1;">5</label>
+                <label class="colorBtn" id="colorBtn1" for="color" style="top: 0px; left: -65px; z-index: -1;"><b>5</b></label>
                 <input id="color2" type="color" value="#FF98EE" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn2')" />
-                <label class="colorBtn" id="colorBtn2" for="color" style="top: 0px; left: -65px; z-index: -1;">15</label>
+                <label class="colorBtn" id="colorBtn2" for="color" style="top: 0px; left: -65px; z-index: -1;"><b>15</b></label>
                 <input id="color3" type="color" value="#FF5500" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn3')" />
-                <label class="colorBtn" id="colorBtn3" for="color" style="top: 0px; left: -65px; z-index: -1;">25</label>
+                <label class="colorBtn" id="colorBtn3" for="color" style="top: 0px; left: -65px; z-index: -1;"><b>25</b></label>
             </div>
             <button class="glowing_button" type="submit" onclick="generateRandomSettings()" style="top: 30px;">Random Settings</button>
             <button class="glowing_button" type="submit" onclick="menu('pacman'); setGameValues();" style="top: 30px;">Play</button>
@@ -192,11 +193,11 @@
                 </div>
                 <div class="color_pickers_game">
                     <input id="color1_game" type="color" value="#50FFEB" style="opacity: 0;" oninput="changeBallColor(this.value,'colorBtn1_game')" />
-                    <label class="colorBtn_game" id="colorBtn1_game" for="color" style="left: -35px; z-index: -1;">5</label>
+                    <label class="colorBtn_game" id="colorBtn1_game" for="color" style="left: -35px; z-index: -1;"><b>5</b></label>
                     <input id="color2_game" type="color" value="#FF98EE" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn2_game')" />
-                    <label class="colorBtn_game" id="colorBtn2_game" for="color" style="left: -35px; z-index: -1;">15</label>
+                    <label class="colorBtn_game" id="colorBtn2_game" for="color" style="left: -35px; z-index: -1;"><b>15</b></label>
                     <input id="color3_game" type="color" value="#FF5500" style="opacity: 0; " oninput="changeBallColor(this.value,'colorBtn3_game')" />
-                    <label class="colorBtn_game" id="colorBtn3_game" for="color" style="left:-35px; z-index:-1;">25</label>
+                    <label class="colorBtn_game" id="colorBtn3_game" for="color" style="left:-35px; z-index:-1;"><b>25</b></label>
                 </div>
                 <div class="lives">
                     <img id="life1" src="./images/heart.png" style="width: 8%; height: auto;">

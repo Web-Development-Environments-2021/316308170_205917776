@@ -110,7 +110,8 @@ class Ghost extends MoveObject {
             if (!(grid[next_location[1]][next_location[0]] == 4 || //if is food, don't override it.
                     grid[next_location[1]][next_location[0]] == 5 ||
                     grid[next_location[1]][next_location[0]] == 6 ||
-                    grid[next_location[1]][next_location[0]] == 9)) {
+                    grid[next_location[1]][next_location[0]] == 9 ||
+                    grid[next_location[1]][next_location[0]] == 10)) {
                 grid[next_location[1]][next_location[0]] = 2;
             }
 

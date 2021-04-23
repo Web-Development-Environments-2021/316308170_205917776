@@ -76,7 +76,7 @@ header {
     left: 20%;
     width: 60%;
     height: 72%;
-    background-color: rgba(0, 0, 0, 0.301);
+    background-color: rgba(0, 0, 0, 0.63);
     z-index: 1;
     border: solid 2px rgb(255, 255, 255);
     border-collapse: collapse;
@@ -129,6 +129,7 @@ h1 {
 .settings {
     display: none;
     text-align: center;
+    margin-top: -20px;
 }
 
 .settings label,
@@ -153,6 +154,7 @@ h1 {
     float: none;
     margin-left: 300px;
     display: inline-flexbox;
+    margin-bottom: 10px;
 }
 
 .text_left {
@@ -161,6 +163,7 @@ h1 {
     float: left;
     left: 150px;
     display: inline-flexbox;
+    margin-bottom: 10px;
 }
 
 .glowing_button {
@@ -176,6 +179,7 @@ h1 {
     z-index: 0;
     border-radius: 10px;
     border: solid 0.3px rgba(255, 255, 255, 0.473);
+    margin-top: -20px;
 }
 
 .glowing_button:before {
@@ -262,7 +266,7 @@ footer {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin: 10px;
+    margin-right: 10px;
 }
 
 .colorBtn:hover,
@@ -280,6 +284,7 @@ footer {
     position: relative;
     width: 60%;
     padding-left: 80px;
+    margin-top: -20px;
 }
 
 .color_pickers_game {
@@ -314,6 +319,12 @@ footer {
     display: flexbox;
     height: 100%;
     width: 100%;
+}
+
+#game label,
+p,
+b {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 #canvas {
