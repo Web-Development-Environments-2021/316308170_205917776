@@ -6,6 +6,8 @@ var key_right = "ArrowRight";
 var key_is_pressed = false
 var key_buttons = document.getElementsByName('key_button');
 var users_DB = new Map([["k",["k","k k","k@k.com","1/1/95"]]]) // user & passwords dictionary {user : [password,fullname,email,birthday]}
+const k_mail = ["k@k.com"];
+var mails_DB = new Set(k_mail);
 var online_user = "";
 
 // for gal wanted to add set for mail's and check all the other things 
@@ -29,12 +31,14 @@ $(document).ready(function () {
 			},
 			full_name: {
 				required: true,
-				lettersonly: true,
+				letterswithspace: true,
                 maxlength : 50
 			},
 			email: {
 				required: true,
 				email: true,
+                isEmail : true,
+                emailTaken : true,
                 maxlength : 50
 			},
 			birthdate: {
@@ -55,13 +59,15 @@ $(document).ready(function () {
 			},
 			full_name: {
 				required: "Please enter a name",
-				lettersonly: "Full name can be only letters",
+				letterswithspace: "Full name can be only letters",
                 maxlength :"Fullname too long, maximum 50 characters"
 			},
 			email: {
 				required: "Please enter an email address",
-				email: "Please enter a valid email",
-                maxlength :"Email too long, maximum 50 characters"
+                email : "Please enter an email address",
+				isEmail: "Please enter an email address",
+                emailTaken : "Email already taken",
+                maxlength : "Email too long, maximum 50 characters"
 			},
 			birthdate: {
 				required: "Please enter a birthday"
@@ -75,58 +81,74 @@ $(document).ready(function () {
 	        let t_email = document.getElementById("r_email").value;
             let t_birthdate = document.getElementById("r_birthdate").value;
             users_DB.set(t_username,[t_password,t_fullname,t_email,t_birthdate]);
+            mails_DB.add(t_email)
             menu('login')      
 			cleatText('register');
 		},
 	});
 
 	//login validation
-	$("#login_form").validate({
-		rules: {
-			username: {
-				required: true,
-			},
-			password: {
-				required: true,
-				validUser: true
-			}
-		},
-		messages: {
-			username: {
-				required: "Please enter username"
-			},
-			password: {
-				required: "Please enter an password",
-				validUser: "Username or password is not valid"
-			}
-		},
-		submitHandler: function () {
-            online_user = document.getElementById("l_username").value; // if not working cuz of double name id
-            menu('settings')      
-			cleatText('login');
-		},
-	});
-
-
+    $('#b_login').click( function() {     
+        $("#login_form").validate({
+            rules: {
+                username: {
+                    required: true,
+                },
+                password: {
+                    required: true,
+                    validUser: true
+                }
+            },
+            messages: {
+                username: {
+                    required: "Please enter username"
+                },
+                password: {
+                    required: "Please enter an password",
+                    validUser: "Username or password is not valid"
+                }
+            },
+            submitHandler: function () {
+                online_user = document.getElementById("l_username").value; 
+                menu('settings')   
+                cleatText('login');
+            },
+            // invalidHandler : function(event,validator){
+                
+            // },
+        });
+    });
 });
 $(function() {
 
 	// register check
-	$.validator.addMethod('strongPassword', function (value, element) {
-		return this.optional(element) ||
-			value.length >= 6 &&
-			/\d/.test(value) &&
-			/[a-z]/i.test(value);
+	$.validator.addMethod('strongPassword', function (pass) {
+		return /\d/.test(pass) && /[a-z]/i.test(pass);
 	});
 
 	$.validator.addMethod('validUsername', function (newUser) {
 		return !(users_DB.has(newUser));
 	});
 
+    $.validator.addMethod('isEmail',function (mail){
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(mail);
+    });
+
+    $.validator.addMethod('emailTaken',function (mail){
+        return !(mails_DB.has(mail))
+    });
+
+    $.validator.addMethod('letterswithspace',function (fullname){  
+        var RegExpression = /^[a-zA-Z\s]*$/;  
+        return RegExpression.test(fullname)
+    });
+
+
      // login check
      $.validator.addMethod('validUser', function (password) {  /// was password,element (if not work have to be elemet too)
 		let username_input = document.getElementById("l_username").value;
-        let user_password = users_DB[username_input]; // password of the user
+        let user_password = users_DB.get(username_input); // password of the user
 		if(user_password != null && user_password[0] === password) { 
 			return true;
 		}
