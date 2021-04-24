@@ -59,6 +59,10 @@ var blue_ghost_start = board.getPixel([26, 29])
 var blue_ghost = new Ghost(blue_ghost_start[0], blue_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size, ghost_velocity);
 blue_ghost.locationOngrid = board.getLocation([blue_ghost.X, blue_ghost.Y]);
 
+var extra_ghost1 = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size, ghost_velocity);
+extra_ghost1.locationOngrid = board.getLocation([extra_ghost1.X, extra_ghost1.Y]);
+var extra_ghost2 = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size, ghost_velocity);
+extra_ghost2.locationOngrid = board.getLocation([extra_ghost2.X, extra_ghost2.Y]);
 var ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost] //should be random
 
 
@@ -103,6 +107,14 @@ function checkIfCrash(ghost) {
             let curr_ghost = ghosts[i]
             grid[curr_ghost.locationOngrid[1]][curr_ghost.locationOngrid[0]] = 0;
             curr_ghost.resetLocation();
+        }
+        if (extra_ghost1 in ghosts) {
+            grid[extra_ghost1.locationOngrid[1]][extra_ghost1.locationOngrid[0]] = 0;
+            extra_ghost1.resetLocation();
+        }
+        if (extra_ghost2 in ghosts) {
+            grid[extra_ghost2.locationOngrid[1]][extra_ghost2.locationOngrid[0]] = 0;
+            extra_ghost2.resetLocation();
         }
         grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
         pacman.resetLocation();

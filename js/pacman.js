@@ -73,12 +73,11 @@ class Pacman extends MoveObject {
                 // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 10) {
                 if (Math.random() < 0.5) {
-                    random_index = Math.floor(Math.random() * (ghosts.length))
+                    let random_index = Math.floor(Math.random() * (ghosts.length))
                     ghosts.splice(random_index, 1)
                 } else {
-                    let new_ghosts = [red_ghost, pink_ghost, orange_ghost, blue_ghost]
-                    random_index = Math.floor(Math.random() * (new_ghosts.length))
-                    ghosts.push(new_ghosts[random_index])
+                    if (ghosts.length < 5) ghosts.push(extra_ghost1)
+                    else ghosts.push(extra_ghost2)
                 }
             }
             grid[prev_location[1]][prev_location[0]] = 0;

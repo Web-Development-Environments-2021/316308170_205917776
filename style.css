@@ -371,14 +371,15 @@ b {
 }
 
 label.error {
-    display:block; /* change the display to block*/
+    display: block;
+    /* change the display to block*/
     position: relative;
     /* width:200px; if necessary */
-    font-size:11px;
-    background-color:#cc0000;
-    color:#FFFFFF;
-    padding:3px;
-    margin-left:5px;
+    font-size: 11px;
+    background-color: #cc0000;
+    color: #FFFFFF;
+    padding: 3px;
+    margin-left: 5px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
 }

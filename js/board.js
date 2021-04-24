@@ -57,8 +57,18 @@ class Board {
         this.startLocation = startlocation;
         this.sour_sweet_candy_size = 60;
         this.sour_sweet_growth = false;
+        this.ghosts_cells = [
+            [1, 1],
+            [29, 1],
+            [1, 26],
+            [29, 26]
+        ]
     }
 
+
+    isGhostCell(i, j) {
+        return (i == 1 && j == 1) || (i == 29 && j == 1) || (i == 1 && j == 26) || (i == 29 && j == 26)
+    }
 
     getLocation(location) {
         var x = Math.floor((location[0] - this.startLocation[0]) / (this.wall_size))
@@ -140,14 +150,19 @@ class Board {
                     context.strokeStyle = "yellow";
                     context.stroke();
                 }
-                else{ /// test the grid numbers!
-                    context.font = '6px'
-                    context.fillStyle = "white"; //color
-                    context.fillText(grid[i][j],this.startLocation[0] + this.wall_size * j +4.5, this.startLocation[1] + this.wall_size * i +12);          
-                }
+                // else { /// test the grid numbers!
+                //     context.font = '6px'
+                //     context.fillStyle = "white"; //color
+                //     context.fillText(grid[i][j], this.startLocation[0] + this.wall_size * j + 4.5, this.startLocation[1] + this.wall_size * i + 12);
+                // }
+
+                // context.font = '6px'
+                // context.fillStyle = "white"; //color
+                // context.fillText(grid[i][j], this.startLocation[0] + this.wall_size * j + 4.5, this.startLocation[1] + this.wall_size * i + 12);
             }
         }
-        // console.log('here3');
+        /// test the grid numbers!
+
     }
 
     isCorner(i, j) {
@@ -177,22 +192,23 @@ class Board {
                     grid[i][j] = 6;
                     balls_remain--;
                     num_of_25_balls--;
-                } else if (grid[i][j] == 0 && this.isCorner(i, j) && num_of_sour_sweet_candies > 0 && Math.random() < 0.01) {
+                } else if (grid[i][j] == 0 && !this.isGhostCell(i, j) && this.isCorner(i, j) && num_of_sour_sweet_candies > 0 && Math.random() < 0.01) {
                     grid[i][j] = 9;
+                    console.log(i, j)
                     num_of_sour_sweet_candies--;
-                } else if (grid[i][j] == 0 && this.isCorner(i, j) && num_of_ghost_candy > 0 && Math.random() < 0.01) {
+                } else if (grid[i][j] == 0 && !this.isGhostCell(i, j) && this.isCorner(i, j) && num_of_ghost_candy > 0 && Math.random() < 0.01) {
                     grid[i][j] = 10;
+                    console.log(i, j)
                     num_of_ghost_candy--;
                 }
                 // handle the remainder of balls from the Math.floor() - put 5 points balls.
-                else if (grid[i][j] == 0 && balls_remain > 0 && num_of_5_balls == 0 &&
+                else if (grid[i][j] == 0 && !([i, j] in this.ghosts_cells) && balls_remain > 0 && num_of_5_balls == 0 &&
                     num_of_15_balls == 0 && num_of_25_balls == 0 && Math.random() < 0.01) {
                     grid[i][j] = 4;
                     balls_remain--;
-                    num_of_5_balls--;
                 }
             }
         }
-        if (balls_remain > 0) this.generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
+        if (balls_remain > 0 || num_of_sour_sweet_candies > 0 || num_of_ghost_candy > 0) this.generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
     }
 }
