@@ -10,6 +10,9 @@ context.scale(scale, scale);
 var ghost_img = document.createElement("img");
 ghost_img.src = "./images/ghosts.png"
 
+/// test canvas 
+const test_canvas = document.getElementById('test_canvas');
+const test_ctx = canvas.getContext('2d');
 
 // ghost sprite size (160,160) space (30), space to other ghost (50,30)
 

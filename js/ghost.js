@@ -40,7 +40,7 @@ class Ghost extends MoveObject {
 
     next_move() {
         let random_condition = Math.random() < (this.diff_level / (this.diff_level + 1))
-        if ((!this.checkForTurnCollision(this.vx, this.vy) && random_condition) || this.collisionDetection()) {
+        if (this.collisionDetection() || random_condition) {
             if (this.timer > 40) {
                 this.diff_level++;
                 this.timer = 0;

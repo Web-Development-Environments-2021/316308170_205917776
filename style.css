@@ -338,15 +338,6 @@ b {
     /* border: solid 2px red; */
 }
 
-#hud {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-}
-
 #score {
     display: inline-flex;
     position: absolute;

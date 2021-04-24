@@ -14,12 +14,14 @@ class MoveObject{
     checkRealPoint(){
         // check real point of pacman - canvas draw squre(0,0) - pacman(10+10)
     
-        var real_x = this.locationOngrid[0];
-        var real_y = this.locationOngrid[1];
-        var px_x = Math.floor(real_x * board.wall_size + board.startLocation[0] + this.center_point); //change here for ghost img!
-        var px_y = Math.floor(real_y * board.wall_size + board.startLocation[1] + this.center_point);
+        let real_x = this.locationOngrid[0];
+        let real_y = this.locationOngrid[1];
+        let px_x = Math.floor(real_x * board.wall_size + board.startLocation[0] + this.center_point); //change here for ghost img!
+        let px_y = Math.floor(real_y * board.wall_size + board.startLocation[1] + this.center_point);
+        let f_X = Math.floor(this.X);
+        let f_Y = Math.floor(this.Y);
 
-        if(px_x == Math.floor(this.X) && px_y == Math.floor(this.Y)) return true;
+        if((px_x -1 <= f_X && f_X < px_x +1) && (px_y-1 <= f_Y && f_Y < px_y+ 1)) return true;
         
         return false;
     }
