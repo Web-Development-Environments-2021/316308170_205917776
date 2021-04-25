@@ -113,6 +113,12 @@ h1 {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.menu_field {
+    border: solid 2px red;
+    margin-bottom: 2%;
+    display: inline-flexbox;
+}
+
 .about {
     display: none
 }
@@ -147,6 +153,8 @@ h1 {
 #settings_button_div {
     flex-direction: row;
     vertical-align: middle;
+    border: solid 2px greenyellow;
+    margin-bottom: 1%;
 }
 
 .field_right {
@@ -154,7 +162,6 @@ h1 {
     float: none;
     margin-left: 300px;
     display: inline-flexbox;
-    margin-bottom: 10px;
 }
 
 .text_left {
@@ -163,7 +170,6 @@ h1 {
     float: left;
     left: 150px;
     display: inline-flexbox;
-    margin-bottom: 10px;
 }
 
 .glowing_button {
@@ -294,7 +300,7 @@ footer {
     padding-left: 20px;
     padding-top: 20px;
     display: inline-flex;
-    top: 140px;
+    top: 300px;
     left: 10px;
     float: left;
 }
@@ -333,7 +339,7 @@ b {
     height: 100%;
     position: relative;
     top: 0;
-    left: 10%;
+    left: 20%;
     z-index: 2;
     /* border: solid 2px red; */
 }
@@ -341,22 +347,95 @@ b {
 #score {
     display: inline-flex;
     position: absolute;
+    top: 35px;
+    left: 10px;
+    width: 30%;
+}
+
+#username_display {
+    display: inline-flex;
+    position: absolute;
     top: 0px;
     left: 10px;
     width: 30%;
 }
 
+#move_keys {
+    display: inline-flex;
+    position: absolute;
+    top: 105px;
+    left: 10px;
+    width: 40%;
+}
+
+#balls_settings {
+    display: inline-flex;
+    position: absolute;
+    top: 240px;
+    left: 10px;
+    width: 30%;
+}
+
+.keys_display_game {
+    display: inline-flex;
+    position: absolute;
+    top: 170px;
+    left: 10px;
+    width: 40%;
+    height: 20%;
+}
+
+.key_button_up {
+    /* display: inline-block; */
+    position: absolute;
+    top: 0px;
+    left: 50px;
+}
+
+.key_button_down {
+    /* display: inline-block; */
+    position: absolute;
+    top: 60px;
+    left: 50px;
+}
+
+.key_button_right {
+    /* display; */
+    position: absolute;
+    top: 30px;
+    left: 100px;
+}
+
+.key_button_left {
+    /* display: inline-block; */
+    position: absolute;
+    top: 30px;
+    left: 00px;
+}
+
+#Lives {
+    display: inline-flex;
+    position: absolute;
+    top: 330px;
+    left: 10px;
+    width: 30%;
+}
+
 #score p,
-#timer p {
+#timer p,
+#username_display p,
+#move_keys p,
+#balls_settings p,
+#Lives p {
     color: chartreuse;
     text-align: center;
-    font-size: 30px;
+    font-size: 24px;
 }
 
 #timer {
     display: inline-flex;
     position: absolute;
-    top: 40px;
+    top: 70px;
     left: 10px;
     width: 10%;
 }
@@ -364,16 +443,16 @@ b {
 .lives {
     display: inline-flex;
     position: absolute;
-    top: 200px;
+    top: 390px;
     left: 10px;
     width: 30%;
     justify-content: center;
 }
 
 label.error {
-    display: block;
+    display: inline-block;
     /* change the display to block*/
-    position: relative;
+    position: absolute;
     /* width:200px; if necessary */
     font-size: 11px;
     background-color: #cc0000;

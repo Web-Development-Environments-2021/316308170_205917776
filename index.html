@@ -31,7 +31,7 @@
         <div class="register">
             <h1>Sign Up</h1>
             <form id='register_form'>
-                <div class="username">
+                <div class="menu_field">
                     <div class="text_left">
                         <label for="username">Username:</label>
                     </div>
@@ -39,7 +39,7 @@
                         <input type="text" placeholder="Username" name="username" id="r_username">
                     </div>
                 </div>
-                <div class="password">
+                <div class="menu_field">
                     <div class="text_left">
                         <label for="password">Password:</label>
                     </div>
@@ -47,7 +47,7 @@
                         <input type="password" placeholder="Password" name="password" id="r_password">
                     </div>
                 </div>
-                <div class="full_name">
+                <div class="menu_field">
                     <div class="text_left">
                         <label for="full_name">Full Name:</label>
                     </div>
@@ -55,7 +55,7 @@
                         <input type="text" placeholder="Full Name" name="full_name" id="r_full_name">
                     </div>
                 </div>
-                <div class="email">
+                <div class="menu_field">
                     <div class="text_left">
                         <label for="email">Email:</label>
                     </div>
@@ -63,7 +63,7 @@
                         <input type="email" placeholder="Email" name="email" id="r_email">
                     </div>
                 </div>
-                <div class="birthdate">
+                <div class="menu_field">
                     <div class="text_left">
                         <label for="birthdate">Birth Date:</label>
                     </div>
@@ -78,7 +78,7 @@
         <div class="login">
             <h1>Log In</h1>
             <form id='login_form'>
-                <div class="username">
+                <div class="menu_field">
                     <div class="text_left">
                         <label for="username">Username:</label>
                     </div>
@@ -86,7 +86,7 @@
                         <input type="text" placeholder="Username" name="username" id="l_username">
                     </div>
                 </div>
-                <div class="password">
+                <div class="menu_field">
                     <div class="text_left">
                         <label for="password">Password:</label>
                     </div>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="field_right">
                     <input type="range" id=slider_bar_monsters name="rangeInput" min="1" max="4" oninput="updateTextInput(this.value, 'slider_value_monsters');">
-                    <input type="text" id="slider_value_monsters" value="4" readonly="readonly" style="width:30px; text-align:center">
+                    <input type="text" id="slider_value_monsters" value="3" readonly="readonly" style="width:30px; text-align:center">
                 </div>
             </div>
             <div class="slidecontainer">
@@ -181,15 +181,32 @@
         <div class="pacman">
             <div id="game">
                 <canvas id="canvas" width="1920" height="1080"></canvas>
+                <div id="username_display">
+                    <p>Online User:&nbsp</p>
+                    <p id="online_username_display"></p>
+                </div>
                 <div id="score">
                     <p>Score:&nbsp</p>
                     <p id="score_number">0</p>
-                    <!-- <input type="text" id="game_score" value="0" readonly="readonly" style="width:30px; text-align:center"> -->
                 </div>
                 <div id="timer">
                     <p>Time:&nbsp</p>
                     <p id="timer_count"></p>
-                    <!-- <input type="text" id="game_score" value="0" readonly="readonly" style="width:30px; text-align:center"> -->
+                </div>
+                <div id="move_keys">
+                    <p>Chosen move keys:</p>
+                </div>
+                <div class="keys_display_game">
+                    <input class="key_button_up" type="button" name="key_button" id="MoveUp_game">
+                    <input class="key_button_down" type="button" name="key_button" id="MoveDown_game">
+                    <input class="key_button_right" type="button" name="key_button" id="MoveRight_game">
+                    <input class="key_button_left" type="button" name="key_button" id="MoveLeft_game">
+                </div>
+                <div id="balls_settings">
+                    <p>Food Colors:</p>
+                </div>
+                <div id="Lives">
+                    <p>Lives 'till you die:</p>
                 </div>
                 <div class="color_pickers_game">
                     <input id="color1_game" type="color" value="#50FFEB" style="opacity: 0;" oninput="changeBallColor(this.value,'colorBtn1_game')" />

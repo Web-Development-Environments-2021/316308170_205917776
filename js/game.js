@@ -68,6 +68,14 @@ var ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost] //should be rando
 
 
 function setGameValues() {
+    goUp = document.getElementById('MoveUp_input').value;
+    goDown = document.getElementById('MoveDown_input').value;
+    goRight = document.getElementById('MoveRight_input').value;
+    goLeft = document.getElementById('MoveLeft_input').value;
+    document.getElementById('MoveUp_game').value = goUp;
+    document.getElementById('MoveDown_game').value = goDown;
+    document.getElementById('MoveRight_game').value = goRight;
+    document.getElementById('MoveLeft_game').value = goLeft;
     var num_of_balls = document.getElementById('slider_value_balls').value;
     var num_of_ghosts = document.getElementById('slider_value_monsters').value;
     // remove random shots - depends on num_of_ghosts given.
@@ -150,11 +158,12 @@ function resetGame() {
 }
 
 window.addEventListener('keydown', function(e) {
+        console.log(e.key)
         if (e.code === 'Space') break_animation = true;
-        else if (e.code === goUp) pacman.setVelocity(0, -velocity);
-        else if (e.code === goDown) pacman.setVelocity(0, velocity);
-        else if (e.code === goLeft) pacman.setVelocity(-velocity, 0);
-        else if (e.code === goRight) pacman.setVelocity(velocity, 0);
+        else if (e.key === goUp) pacman.setVelocity(0, -velocity);
+        else if (e.key === goDown) pacman.setVelocity(0, velocity);
+        else if (e.key === goLeft) pacman.setVelocity(-velocity, 0);
+        else if (e.key === goRight) pacman.setVelocity(velocity, 0);
     })
     // board.generateBoard();
 
