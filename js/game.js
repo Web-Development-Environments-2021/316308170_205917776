@@ -10,9 +10,10 @@ context.scale(scale, scale);
 var ghost_img = document.createElement("img");
 ghost_img.src = "./images/ghosts.png"
 
-/// test canvas 
-const test_canvas = document.getElementById('test_canvas');
-const test_ctx = canvas.getContext('2d');
+var cherry_img = document.createElement("img");
+cherry_img.src = "./images/cherry.png"
+
+
 
 // ghost sprite size (160,160) space (30), space to other ghost (50,30)
 
@@ -44,26 +45,30 @@ var pacman = new Pacman(pacman_start[0] + (wall_size / 2), pacman_start[1] + (wa
 pacman.locationOngrid = board.getLocation([pacman.X, pacman.Y]);
 
 var red_ghost_start = board.getPixel([1, 1])
-var red_ghost = new Ghost(red_ghost_start[0], red_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size, ghost_velocity);
+var red_ghost = new Ghost(red_ghost_start[0], red_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size);
 red_ghost.locationOngrid = board.getLocation([red_ghost.X, red_ghost.Y]);
 
 var pink_ghost_start = board.getPixel([1, 29])
-var pink_ghost = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 380, wall_size, ghost_velocity);
+var pink_ghost = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 380, wall_size);
 pink_ghost.locationOngrid = board.getLocation([pink_ghost.X, pink_ghost.Y]);
 
 var orange_ghost_start = board.getPixel([26, 1])
-var orange_ghost = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 380, wall_size, ghost_velocity);
+var orange_ghost = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 380, wall_size);
 orange_ghost.locationOngrid = board.getLocation([orange_ghost.X, orange_ghost.Y]);
 
 var blue_ghost_start = board.getPixel([26, 29])
-var blue_ghost = new Ghost(blue_ghost_start[0], blue_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size, ghost_velocity);
+var blue_ghost = new Ghost(blue_ghost_start[0], blue_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size);
 blue_ghost.locationOngrid = board.getLocation([blue_ghost.X, blue_ghost.Y]);
 
-var extra_ghost1 = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size, ghost_velocity);
+var extra_ghost1 = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size);
 extra_ghost1.locationOngrid = board.getLocation([extra_ghost1.X, extra_ghost1.Y]);
-var extra_ghost2 = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size, ghost_velocity);
+var extra_ghost2 = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size);
 extra_ghost2.locationOngrid = board.getLocation([extra_ghost2.X, extra_ghost2.Y]);
 var ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost] //should be random
+
+var cherry_start = board.getPixel([14, 17])
+var cherry = new Cherry(cherry_start[0], cherry_start[1], ghost_velocity, 0, 0, 0, wall_size);
+cherry.locationOngrid = [14, 17];
 
 
 
@@ -124,6 +129,8 @@ function checkIfCrash(ghost) {
             grid[extra_ghost2.locationOngrid[1]][extra_ghost2.locationOngrid[0]] = 0;
             extra_ghost2.resetLocation();
         }
+        grid[cherry.locationOngrid[1]][cherry.locationOngrid[0]] = 0;
+        cherry.resetLocation();
         grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
         pacman.resetLocation();
         alert('got pacman!');
@@ -135,6 +142,8 @@ function animate() {
     board.draw();
     pacman.update();
     pacman.draw();
+    cherry.update();
+    cherry.draw();
     for (let i = 0; i < ghosts.length; i++) {
         ghosts[i].update();
         ghosts[i].draw();

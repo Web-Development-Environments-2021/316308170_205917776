@@ -17,7 +17,7 @@
         <a id="#welcome" onclick="menu('welcome');window.location.reload();">Welcome</a>
         <a id="#register" onclick="menu('register');">Register</a>
         <a id="#login" onclick="menu('login');">Log In</a>
-        <a id="#about" onclick="menu('about');">About</a>
+        <a id="about" onclick="btn_about()">About</a>
     </div>
     <!-- Content div -->
     <div class="content">
@@ -101,8 +101,22 @@
             </form>
         </div>
         <!-- About div -->
-        <div class="about">about</div>
-
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Modal Header</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the Modal Body</p>
+                    <p>Some other text...</p>
+                </div>
+                <div class="modal-footer">
+                    <h3>Modal Footer</h3>
+                </div>
+            </div>
+        </div>
         <!-- Settings div -->
         <div class="settings">
             <h1>Settings</h1>
@@ -227,6 +241,7 @@
                 <script src="./js/MoveObject.js"></script>
                 <script src="./js/pacman.js"></script>
                 <script src="./js/ghost.js"></script>
+                <script src="./js/cherry.js"></script>
                 <script src="./js/game.js"></script>
             </div>
 

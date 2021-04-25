@@ -150,11 +150,11 @@ class Board {
                     context.strokeStyle = "yellow";
                     context.stroke();
                 }
-                // else { /// test the grid numbers!
-                //     context.font = '6px'
-                //     context.fillStyle = "white"; //color
-                //     context.fillText(grid[i][j], this.startLocation[0] + this.wall_size * j + 4.5, this.startLocation[1] + this.wall_size * i + 12);
-                // }
+                else { /// test the grid numbers!
+                    context.font = '6px'
+                    context.fillStyle = "white"; //color
+                    context.fillText(grid[i][j], this.startLocation[0] + this.wall_size * j + 4.5, this.startLocation[1] + this.wall_size * i + 12);
+                }
 
                 // context.font = '6px'
                 // context.fillStyle = "white"; //color

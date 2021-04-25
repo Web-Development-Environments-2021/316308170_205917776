@@ -38,7 +38,6 @@ class MoveObject{
         var isWall = grid[Next_location[1] + vel_y][Next_location[0] + vel_x] == 3;
 
         if(isWall && this.checkRealPoint()){
-            // console.log(Next_location, " vx: ", vel_x," vy : ", vel_y)
             return true;
         } 
         

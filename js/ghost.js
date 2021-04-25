@@ -1,5 +1,5 @@
 class Ghost extends MoveObject {
-    constructor(X, Y, vx, vy, sx, sy, size, velocity) {
+    constructor(X, Y, vx, vy, sx, sy, size) {
         super(X, Y, vx, vy, 0);
         this.original_X = X;
         this.original_Y = Y;
@@ -7,7 +7,7 @@ class Ghost extends MoveObject {
         this.original_vy = vy;
         this.diff_level = 1;
         this.timer = 0;
-        this.velocity = velocity
+        this.velocity = vx;
         this.current_pacman_path = []
         this.img_locations = {
             "up": [sx + 190, sy],
@@ -23,9 +23,12 @@ class Ghost extends MoveObject {
             "left": [-this.velocity, 0],
             "right": [this.velocity, 0]
         }
-        this.current_val = 2;
         this.next_val = 0;
         this.prev_val = 0;
+        this.id = 2;
+        this.img_width = 160;
+        this.img_height = 160;
+        this.img = ghost_img;
     }
 
     isValidCoordinate(x, y, current_path) {
@@ -51,7 +54,8 @@ class Ghost extends MoveObject {
             for (var key in this.move_direction) {
                 if (!this.checkForTurnCollision(this.move_direction[key][0], this.move_direction[key][1])) {
                     let current_distance = Math.sqrt(Math.pow((pacman.X - Math.abs(this.X + this.move_direction[key][0])), 2) + Math.pow((pacman.Y - Math.abs(this.Y + this.move_direction[key][1])), 2));
-                    if (current_distance < distance && Math.random() < 0.99) {
+                    let distance_check = (this.id == 2) ? (current_distance < distance) : (current_distance > distance);
+                    if (distance_check && Math.random() < 0.99) {
                         distance = current_distance;
                         best_direction = key;
                     }
@@ -61,7 +65,7 @@ class Ghost extends MoveObject {
                 this.direction = this.img_locations[best_direction];
                 this.vx = this.move_direction[best_direction][0];
                 this.vy = this.move_direction[best_direction][1];
-                this.changeDirection(this.vx, this.vy)
+                if(this.id == 2) {this.changeDirection(this.vx, this.vy)};
             }
         }
     }
@@ -81,7 +85,7 @@ class Ghost extends MoveObject {
         this.vx = this.original_vx;
         this.vy = this.original_vy;
         this.locationOngrid = board.getLocation([this.X, this.Y]);
-        grid[this.locationOngrid[1]][this.locationOngrid[0]] = 2;
+        grid[this.locationOngrid[1]][this.locationOngrid[0]] = this.id;
     }
 
     update() {
@@ -93,26 +97,15 @@ class Ghost extends MoveObject {
         this.Y += this.vy;
         let next_location = board.getLocation([this.X, this.Y]);
         if (!(current_location[0] == next_location[0] && current_location[1] == next_location[1])) {
-            // if (grid[next_location[1]][next_location[0]] == 1 && !got_pacman) { //got pacman! 
-            //     got_pacman = true;
-            //     document.getElementById('life' + strikes).style.display = "none";
-            //     strikes--;
-            //     alert('got pacman!');
-            //     grid[next_location[1]][next_location[0]] = 0;
-            //     grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
-            //     pacman.resetLocation();
-            //     this.resetLocation();
-            //     got_pacman = false;
-            //     return
-            // }
             grid[current_location[1]][current_location[0]] = this.prev_val;
             this.prev_val = grid[next_location[1]][next_location[0]];
             if (!(grid[next_location[1]][next_location[0]] == 4 || //if is food, don't override it.
                     grid[next_location[1]][next_location[0]] == 5 ||
                     grid[next_location[1]][next_location[0]] == 6 ||
                     grid[next_location[1]][next_location[0]] == 9 ||
-                    grid[next_location[1]][next_location[0]] == 10)) {
-                grid[next_location[1]][next_location[0]] = 2;
+                    grid[next_location[1]][next_location[0]] == 10||
+                    (this.id == 2 && grid[next_location[1]][next_location[0]] == 11))) {
+                grid[next_location[1]][next_location[0]] = this.id;
             }
 
         }
@@ -137,7 +130,7 @@ class Ghost extends MoveObject {
     }
 
     draw() {
-        void context.drawImage(ghost_img, this.direction[0], this.direction[1], 160, 160, this.X, this.Y, this.size, this.size);
+        void context.drawImage(this.img, this.direction[0], this.direction[1], this.img_width, this.img_height, this.X, this.Y, this.size, this.size);
     }
 
 }
