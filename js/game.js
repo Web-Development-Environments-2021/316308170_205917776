@@ -13,7 +13,9 @@ ghost_img.src = "./images/ghosts.png"
 var cherry_img = document.createElement("img");
 cherry_img.src = "./images/cherry.png"
 
-
+var requestAnimationFrame = window.requestAnimationFrame
+var cancelAnimationFrame = window.cancelAnimationFrame
+var myReq;
 
 // ghost sprite size (160,160) space (30), space to other ghost (50,30)
 
@@ -81,6 +83,7 @@ function setGameValues() {
     document.getElementById('MoveRight_game').value = goRight;
     document.getElementById('MoveLeft_game').value = goLeft;
     document.getElementById('online_username_display').innerHTML = online_user
+    document.getElementById('score_number').innerHTML = 0;
     var num_of_balls = document.getElementById('slider_value_balls').value;
     var num_of_ghosts = document.getElementById('slider_value_monsters').value;
     // remove random shots - depends on num_of_ghosts given.
@@ -91,6 +94,7 @@ function setGameValues() {
     num_of_seconds = document.getElementById('slider_value_time').value;
     var num_of_sour_sweet_candies = 2;
     var num_of_ghost_candy = 2;
+    strikes = 5;
     var num_of_5_balls = Math.floor(0.6 * num_of_balls);
     var num_of_15_balls = Math.floor(0.3 * num_of_balls);
     var num_of_25_balls = Math.floor(0.1 * num_of_balls);
@@ -104,10 +108,14 @@ function setGameValues() {
     document.getElementById('colorBtn2_game').style.background = color_of_15_balls;
     document.getElementById('colorBtn3_game').style.background = color_of_25_balls;
     document.getElementById('timer_count').innerHTML = num_of_seconds;
+    document.getElementById('life1').style.display = "inline-flex";
+    document.getElementById('life2').style.display = "inline-flex";
+    document.getElementById('life3').style.display = "inline-flex";
+    document.getElementById('life4').style.display = "inline-flex";
+    document.getElementById('life5').style.display = "inline-flex";
     if (isLightColor(color_of_5_balls)) document.getElementById('colorBtn1').style.color = '#000000';
     else document.getElementById('colorBtn1').style.color = '#FFFFFF';
     board.generateRandomBalls(num_of_balls, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
-
 
 }
 
@@ -133,7 +141,11 @@ function checkIfCrash(ghost) {
         cherry.resetLocation();
         grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
         pacman.resetLocation();
-        alert('got pacman!');
+        if (strikes > 0) alert("gotcha'!");
+        else {
+            alert("Loser!");
+            break_animation = true;
+        }
     }
 }
 
@@ -153,13 +165,47 @@ function animate() {
     }
     if (timer_count > 60) {
         num_of_seconds--;
+        if (num_of_seconds == 0) {
+            let score = parseInt(document.getElementById('score_number').innerHTML);
+            if (score < 100) alert(`You are better than ${score} points!`)
+            else alert('Winner!!!')
+            break_animation = true;
+        }
         document.getElementById('timer_count').innerHTML = num_of_seconds;
         timer_count = 0;
     }
     timer_count++;
     if (break_animation) return;
-    requestAnimationFrame(animate);
+    myReq = requestAnimationFrame(animate);
 }
+
+
+function reset_game() {
+    // reset ghosts
+    ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost]
+    for (let i = 0; i < ghosts.length; i++) {
+        let curr_ghost = ghosts[i]
+        grid[curr_ghost.locationOngrid[1]][curr_ghost.locationOngrid[0]] = 0;
+        curr_ghost.resetLocation();
+    }
+    // remove extra ghosts
+    // for (let i = 0; i < ghosts.length; i++) {
+    //     if (ghosts[i] == extra_ghost1 || ghosts[i] == extra_ghost2) {
+    //         ghosts.splice(i, 1)
+    //         console.log('here')
+    //     }
+    // }
+    // reset cherry and pacman
+    grid[cherry.locationOngrid[1]][cherry.locationOngrid[0]] = 0;
+    cherry.resetLocation();
+    grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
+    pacman.resetLocation();
+    // reset board
+    board.clearGrid();
+    // stop animation and return to settings
+    cancelAnimationFrame(myReq);
+}
+
 
 function resetGame() {
     break_animation = true;
@@ -169,7 +215,6 @@ function resetGame() {
 }
 
 window.addEventListener('keydown', function(e) {
-        console.log(e.key)
         if (e.code === 'Space') break_animation = true;
         else if (e.key === goUp) pacman.setVelocity(0, -velocity);
         else if (e.key === goDown) pacman.setVelocity(0, velocity);
@@ -179,10 +224,10 @@ window.addEventListener('keydown', function(e) {
     // board.generateBoard();
 
 
-const reloadtButton = document.querySelector("#reload");
-// Reload everything:
-function reload() {
-    reload = location.reload();
-}
-// Event listeners for reload
-reloadButton.addEventListener("click", reload, false);
+// const reloadtButton = document.querySelector("#reload");
+// // Reload everything:
+// function reload() {
+//     reload = location.reload();
+// }
+// // Event listeners for reload
+// reloadButton.addEventListener("click", reload, false);

@@ -14,9 +14,9 @@
     </header>
     <!-- Navigation Bar -->
     <div class="topnav">
-        <a id="#welcome" onclick="menu('welcome');window.location.reload();">Welcome</a>
-        <a id="#register" onclick="menu('register');">Register</a>
-        <a id="#login" onclick="menu('login');">Log In</a>
+        <a id="#welcome" onclick="reset_game(); menu('welcome');">Welcome</a>
+        <a id="#register" onclick="reset_game(); menu('register');">Register</a>
+        <a id="#login" onclick="reset_game(); menu('login');">Log In</a>
         <a id="about" onclick="btn_about()">About</a>
     </div>
     <!-- Content div -->
@@ -237,6 +237,7 @@
                     <img id="life4" src="./images/heart.png" style="width: 8%; height: auto;">
                     <img id="life5" src="./images/heart.png" style="width: 8%; height: auto;">
                 </div>
+                <button class="glowing_button" type="submit" onclick="reset_game(); menu('settings');" style="top: 30px;">Reset Game</button>
                 <script src="./js/board.js"></script>
                 <script src="./js/MoveObject.js"></script>
                 <script src="./js/pacman.js"></script>

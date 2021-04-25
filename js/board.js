@@ -172,6 +172,14 @@ class Board {
             (i > 4 * grid.length / 5 && j > 4 * grid.length / 5)
     }
 
+    clearGrid() {
+        for (let i = 0; i < grid.length; i++) {
+            for (let j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] != 3 && grid[i][j] != 7 && grid[i][j] != 8) grid[i][j] = 0;
+            }
+        }
+    }
+
     generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy) {
         for (let i = 0; i < grid.length; i++) {
             for (let j = 0; j < grid[0].length; j++) {
@@ -194,11 +202,9 @@ class Board {
                     num_of_25_balls--;
                 } else if (grid[i][j] == 0 && !this.isGhostCell(i, j) && this.isCorner(i, j) && num_of_sour_sweet_candies > 0 && Math.random() < 0.01) {
                     grid[i][j] = 9;
-                    console.log(i, j)
                     num_of_sour_sweet_candies--;
                 } else if (grid[i][j] == 0 && !this.isGhostCell(i, j) && this.isCorner(i, j) && num_of_ghost_candy > 0 && Math.random() < 0.01) {
                     grid[i][j] = 10;
-                    console.log(i, j)
                     num_of_ghost_candy--;
                 }
                 // handle the remainder of balls from the Math.floor() - put 5 points balls.
