@@ -96,7 +96,6 @@ $(document).ready(function () {
                 },
                 password: {
                     required: true,
-                    validUser: true
                 }
             },
             messages: {
@@ -104,14 +103,22 @@ $(document).ready(function () {
                     required: "Please enter username"
                 },
                 password: {
-                    required: "Please enter an password",
-                    validUser: "Username or password is not valid"
+                    required: "Please enter an password"
                 }
             },
             submitHandler: function () {
-                online_user = document.getElementById("l_username").value; 
-                menu('settings')   
-                cleatText('login');
+                let username_input = document.getElementById("l_username").value;
+                let password_input = document.getElementById("l_password").value;
+                let user_password = users_DB.get(username_input); // password of the user
+                if(user_password != null && user_password[0] === password_input) { 
+                    online_user = username_input;
+                    menu('settings');
+                    cleatText('login');
+                }
+                else{
+                    alert("Username or password is not valid")
+                    cleatText('login');
+                }
             },
             // invalidHandler : function(event,validator){
                 
@@ -144,23 +151,10 @@ $(function() {
         return RegExpression.test(fullname)
     });
 
-
-     // login check
-     $.validator.addMethod('validUser', function (password) {  /// was password,element (if not work have to be elemet too)
-		let username_input = document.getElementById("l_username").value;
-        let user_password = users_DB.get(username_input); // password of the user
-		if(user_password != null && user_password[0] === password) { 
-			return true;
-		}
-        cleatText('login');
-        return false;
-	});
-
 });
 
 function cleatText(form){
-    let validator = $("#"+form +'_form').validate();
-    validator.resetForm();
+    $("#"+form +'_form').trigger("reset")
 }
 
 function disableOtherButtons(activeButton) {
