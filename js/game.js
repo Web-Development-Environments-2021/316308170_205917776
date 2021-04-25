@@ -13,6 +13,8 @@ ghost_img.src = "./images/ghosts.png"
 var cherry_img = document.createElement("img");
 cherry_img.src = "./images/cherry.png"
 
+var music = new Audio("./music/pacman.mp3");
+
 var requestAnimationFrame = window.requestAnimationFrame
 var cancelAnimationFrame = window.cancelAnimationFrame
 var myReq;
@@ -116,7 +118,7 @@ function setGameValues() {
     if (isLightColor(color_of_5_balls)) document.getElementById('colorBtn1').style.color = '#000000';
     else document.getElementById('colorBtn1').style.color = '#FFFFFF';
     board.generateRandomBalls(num_of_balls, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
-
+    isplay();
 }
 
 function checkIfCrash(ghost) {
@@ -144,6 +146,7 @@ function checkIfCrash(ghost) {
         if (strikes > 0) alert("gotcha'!");
         else {
             alert("Loser!");
+            isplay();
             break_animation = true;
         }
     }
@@ -198,21 +201,28 @@ function reset_game() {
     // reset cherry and pacman
     grid[cherry.locationOngrid[1]][cherry.locationOngrid[0]] = 0;
     cherry.resetLocation();
+    cherry.eaten = false; 
     grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
     pacman.resetLocation();
     // reset board
     board.clearGrid();
     // stop animation and return to settings
     cancelAnimationFrame(myReq);
+    isplay();
 }
 
 
 function resetGame() {
     break_animation = true;
     break_animation = false;
-
-
 }
+function isplay() {
+    if(!music.paused) {music.pause();}
+    else{   
+        music.currentTime = 0;
+        music.play();
+    }
+  }
 
 window.addEventListener('keydown', function(e) {
         if (e.code === 'Space') break_animation = true;

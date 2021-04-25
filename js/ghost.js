@@ -80,10 +80,10 @@ class Ghost extends MoveObject {
     }
 
     resetLocation() {
-        this.X = this.original_X;
-        this.Y = this.original_Y;
         this.vx = this.original_vx;
         this.vy = this.original_vy;
+        this.X = this.original_X;
+        this.Y = this.original_Y;
         this.locationOngrid = board.getLocation([this.X, this.Y]);
         grid[this.locationOngrid[1]][this.locationOngrid[0]] = this.id;
     }
