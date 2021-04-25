@@ -49,7 +49,7 @@ class Ghost extends MoveObject {
                 this.timer = 0;
             }
             this.timer++;
-            let distance = Number.MAX_SAFE_INTEGER;
+            let distance = (this.id == 2) ? Number.MAX_SAFE_INTEGER : Number.MIN_SAFE_INTEGER;
             var best_direction = "";
             for (var key in this.move_direction) {
                 if (!this.checkForTurnCollision(this.move_direction[key][0], this.move_direction[key][1])) {
@@ -65,7 +65,7 @@ class Ghost extends MoveObject {
                 this.direction = this.img_locations[best_direction];
                 this.vx = this.move_direction[best_direction][0];
                 this.vy = this.move_direction[best_direction][1];
-                if(this.id == 2) {this.changeDirection(this.vx, this.vy)};
+                if (this.id == 2) { this.changeDirection(this.vx, this.vy) };
             }
         }
     }
@@ -91,6 +91,10 @@ class Ghost extends MoveObject {
     update() {
         // let neighbor = this.find_path_to_pacman(pacman.locationOngrid)
         // get directions by order - best to worst
+        let check_if_edge = this.checkIfEdge(); //check if teleport pacman to other side.
+        if (check_if_edge != false) {
+            this.X = check_if_edge[0];
+        }
         this.next_move();
         let current_location = this.locationOngrid;
         this.X += this.vx;
@@ -103,7 +107,7 @@ class Ghost extends MoveObject {
                     grid[next_location[1]][next_location[0]] == 5 ||
                     grid[next_location[1]][next_location[0]] == 6 ||
                     grid[next_location[1]][next_location[0]] == 9 ||
-                    grid[next_location[1]][next_location[0]] == 10||
+                    grid[next_location[1]][next_location[0]] == 10 ||
                     (this.id == 2 && grid[next_location[1]][next_location[0]] == 11))) {
                 grid[next_location[1]][next_location[0]] = this.id;
             }

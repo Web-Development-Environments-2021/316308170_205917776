@@ -13,14 +13,6 @@ class Pacman extends MoveObject {
         this.mouth_open = 0;
     }
 
-    checkIfEdge() {
-        if (this.locationOngrid[0] == 27 && this.locationOngrid[1] == 14 && this.vx > 0 && this.vy == 0) {
-            return board.getPixel([0, 14]);
-        } else if (this.locationOngrid[0] == 0 && this.locationOngrid[1] == 14 && this.vx < 0 && this.vy == 0) {
-            return board.getPixel([27, 14]);
-        } else return false;
-    }
-
     resetLocation() {
         this.locationOngrid = generateRandomPosition();
         let pixel_xy = board.getPixel(this.locationOngrid)
@@ -79,6 +71,9 @@ class Pacman extends MoveObject {
                     if (ghosts.length < 5) ghosts.push(extra_ghost1)
                     else ghosts.push(extra_ghost2)
                 }
+            } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 11) {
+                document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 50;
+                cherry.eaten = true;
             }
             grid[prev_location[1]][prev_location[0]] = 0;
             grid[this.locationOngrid[1]][this.locationOngrid[0]] = 1;

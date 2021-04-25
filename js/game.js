@@ -67,9 +67,8 @@ extra_ghost2.locationOngrid = board.getLocation([extra_ghost2.X, extra_ghost2.Y]
 var ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost] //should be random
 
 var cherry_start = board.getPixel([14, 17])
-var cherry = new Cherry(cherry_start[0], cherry_start[1], ghost_velocity, 0, 0, 0, wall_size);
+var cherry = new Cherry(cherry_start[0], cherry_start[1], velocity * 0.75, 0, 0, 0, wall_size);
 cherry.locationOngrid = [14, 17];
-
 
 
 function setGameValues() {
@@ -81,6 +80,7 @@ function setGameValues() {
     document.getElementById('MoveDown_game').value = goDown;
     document.getElementById('MoveRight_game').value = goRight;
     document.getElementById('MoveLeft_game').value = goLeft;
+    document.getElementById('online_username_display').innerHTML = online_user
     var num_of_balls = document.getElementById('slider_value_balls').value;
     var num_of_ghosts = document.getElementById('slider_value_monsters').value;
     // remove random shots - depends on num_of_ghosts given.
@@ -142,8 +142,10 @@ function animate() {
     board.draw();
     pacman.update();
     pacman.draw();
-    cherry.update();
-    cherry.draw();
+    if (typeof cherry !== 'undefined' && !cherry.eaten) {
+        cherry.update();
+        cherry.draw();
+    }
     for (let i = 0; i < ghosts.length; i++) {
         ghosts[i].update();
         ghosts[i].draw();

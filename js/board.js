@@ -67,7 +67,8 @@ class Board {
 
 
     isGhostCell(i, j) {
-        return (i == 1 && j == 1) || (i == 29 && j == 1) || (i == 1 && j == 26) || (i == 29 && j == 26)
+        return (i == 1 && j == 1) || (i == 29 && j == 1) || (i == 1 && j == 26) || (i == 29 && j == 26) ||
+            (i == 17 && j == 14)
     }
 
     getLocation(location) {
@@ -149,8 +150,7 @@ class Board {
                     context.lineWidth = 2;
                     context.strokeStyle = "yellow";
                     context.stroke();
-                }
-                else { /// test the grid numbers!
+                } else { /// test the grid numbers!
                     context.font = '6px'
                     context.fillStyle = "white"; //color
                     context.fillText(grid[i][j], this.startLocation[0] + this.wall_size * j + 4.5, this.startLocation[1] + this.wall_size * i + 12);
