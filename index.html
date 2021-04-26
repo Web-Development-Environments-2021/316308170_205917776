@@ -107,14 +107,25 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="close">&times;</span>
-                    <h2>Modal Header</h2>
+                    <h2>About</h2>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the Modal Body</p>
-                    <p>Some other text...</p>
-                </div>
-                <div class="modal-footer">
-                    <h3>Modal Footer</h3>
+                    <p><b>Developers:</b> Ariel Shilo & Gal Alakalay <br> JQuery Plugin used for this game:
+                        <a href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"><u>additional-methods</u></a>,
+                        <a href="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"><u>Validate.</u></a> <br> Button's template taken from <a href="https://codepen.io/kocsten/pen/rggjXp"><u>here.</u></a><br> About modal window taken
+                        from <a href="https://www.w3schools.com/howto/howto_css_modals.asp"><u>here.</u></a><br> Difficulties we've engaged with during the development process: <br>
+                        <ul>
+                            <li>
+                                Responsiveness vs. Collision Detection: while testing our game in different screens size, we've struggled to adjust the characters collision with the walls to the screen pixels resolution.
+                            </li>
+                            <li>
+                                Event-handling and asynchronized functions: as part of the 'Green pill', we slowed down the ghosts velocity for 4 seconds, and after that used SetTimeOut function to reset their velocity. But in rare conditions the user would use the 'Red pill' which
+                                makes a ghost disappear in 50% chance before it completes the async function. We had to handle this case.
+                            </li>
+                        </ul>
+
+
+                    </p>
                 </div>
             </div>
         </div>

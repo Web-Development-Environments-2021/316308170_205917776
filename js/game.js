@@ -1,7 +1,7 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 var wall_size = 18;
-var canvas_width = 1000;
+var canvas_width = wall_size * 28;
 var canvas_height = wall_size * 31;
 var scale = window.devicePixelRatio
 canvas.width = canvas_width * scale;
@@ -13,7 +13,7 @@ ghost_img.src = "./images/ghosts.png"
 var cherry_img = document.createElement("img");
 cherry_img.src = "./images/cherry.png"
 
-var music = new Audio("./music/pacman.mp3");
+var music = new Audio("./music/game_soundtrack.mp3");
 
 var requestAnimationFrame = window.requestAnimationFrame
 var cancelAnimationFrame = window.cancelAnimationFrame
@@ -35,7 +35,7 @@ var num_of_seconds;
 var timer_count = 0;
 var strikes = 5;
 var got_pacman = false;
-var board = new Board([canvas.width / 6, 0], wall_size);
+var board = new Board([0, 0], wall_size);
 
 function generateRandomPosition() {
     let i = 5 + Math.floor(Math.random() * (grid.length - 10))
@@ -49,27 +49,27 @@ var pacman = new Pacman(pacman_start[0] + (wall_size / 2), pacman_start[1] + (wa
 pacman.locationOngrid = board.getLocation([pacman.X, pacman.Y]);
 
 var red_ghost_start = board.getPixel([1, 1])
-var red_ghost = new Ghost(red_ghost_start[0], red_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size,"red");
+var red_ghost = new Ghost(red_ghost_start[0], red_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size, "red");
 red_ghost.locationOngrid = board.getLocation([red_ghost.X, red_ghost.Y]);
 
 var pink_ghost_start = board.getPixel([1, 29])
-var pink_ghost = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 380, wall_size,"pink");
+var pink_ghost = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 380, wall_size, "pink");
 pink_ghost.locationOngrid = board.getLocation([pink_ghost.X, pink_ghost.Y]);
 
 var orange_ghost_start = board.getPixel([26, 1])
-var orange_ghost = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 380, wall_size,"orange");
+var orange_ghost = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 380, wall_size, "orange");
 orange_ghost.locationOngrid = board.getLocation([orange_ghost.X, orange_ghost.Y]);
 
 var blue_ghost_start = board.getPixel([26, 29])
-var blue_ghost = new Ghost(blue_ghost_start[0], blue_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size,"blue");
+var blue_ghost = new Ghost(blue_ghost_start[0], blue_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size, "blue");
 blue_ghost.locationOngrid = board.getLocation([blue_ghost.X, blue_ghost.Y]);
 
-var extra_ghost1 = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size,"ex1");
+var extra_ghost1 = new Ghost(pink_ghost_start[0], pink_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size, "ex1");
 extra_ghost1.locationOngrid = board.getLocation([extra_ghost1.X, extra_ghost1.Y]);
-var extra_ghost2 = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size,"ex2");
+var extra_ghost2 = new Ghost(orange_ghost_start[0], orange_ghost_start[1], ghost_velocity, 0, 400, 0, wall_size, "ex2");
 extra_ghost2.locationOngrid = board.getLocation([extra_ghost2.X, extra_ghost2.Y]);
 var ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost] //should be random
-var ex1_in_ghosts =false;
+var ex1_in_ghosts = false;
 
 
 var cherry_start = board.getPixel([14, 17])
@@ -171,17 +171,17 @@ function animate() {
         ghosts[i].draw();
         checkIfCrash(ghosts[i]);
     }
-    if (timer_count > 60|| board.numofballs == 0) {
+    if (timer_count > 60 || board.numofballs == 0) {
         num_of_seconds--;
         if (num_of_seconds == 0 || board.numofballs == 0) {
-            if(!gameover){
-                gameover=true;
+            if (!gameover) {
+                gameover = true;
                 setTimeout(function game_over() {
-                        music.pause();
-                        let score = parseInt(document.getElementById('score_number').innerHTML);
-                        if (score < 100) alert(`You are better than ${score} points!`)
-                        else alert('Winner!!!')
-                        break_animation = true;
+                    music.pause();
+                    let score = parseInt(document.getElementById('score_number').innerHTML);
+                    if (score < 100) alert(`You are better than ${score} points!`)
+                    else alert('Winner!!!')
+                    break_animation = true;
                 }, 300)
             }
         }
@@ -212,11 +212,12 @@ function reset_game() {
     // reset cherry and pacman
     grid[cherry.locationOngrid[1]][cherry.locationOngrid[0]] = 0;
     cherry.resetLocation();
-    cherry.eaten = false; 
+    cherry.eaten = false;
     grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
     pacman.resetLocation();
     // reset board
     board.clearGrid();
+    board.numofballs = -1;
     // stop animation and return to settings
     cancelAnimationFrame(myReq);
     m_stop()
@@ -229,11 +230,16 @@ function resetGame() {
     break_animation = true;
     break_animation = false;
 }
-function m_play() {music.currentTime = 0;music.play();}
-function m_stop() {music.pause();}
+
+function m_play() {
+    music.currentTime = 0;
+    music.play();
+}
+
+function m_stop() { music.pause(); }
+
 function isplay() {
-    if(!music.paused ) {music.pause();}
-    else{   
+    if (!music.paused) { music.pause(); } else {
         music.currentTime = 0;
         music.play();
     }

@@ -62,7 +62,7 @@ class Pacman extends MoveObject {
                 for (let i = 0; i < ghosts.length; i++) {
                     ghosts[i].setVelocity(ghosts[i].velocity / 4)
                     setTimeout(function fix_ghost_velocity() {
-                        ghosts[i].setVelocity(ghosts[i].velocity)
+                        if (typeof ghosts[i] !== 'undefined') ghosts[i].setVelocity(ghosts[i].velocity)
                     }, 4000)
                 }
                 // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
@@ -71,11 +71,10 @@ class Pacman extends MoveObject {
                     let random_index = Math.floor(Math.random() * (ghosts.length))
                     ghosts.splice(random_index, 1)
                 } else {
-                    if (!ex1_in_ghosts){ 
+                    if (!ex1_in_ghosts) {
                         ex1_in_ghosts = true;
                         ghosts.push(extra_ghost1)
-                    }
-                    else ghosts.push(extra_ghost2)
+                    } else ghosts.push(extra_ghost2)
                 }
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 11) {
                 document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 50;
