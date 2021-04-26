@@ -2,7 +2,8 @@
 
 
 class MoveObject {
-    constructor(X, Y, vx, vy, center_point) {
+    constructor(X, Y, vx, vy, center_point,name = "asd") {
+        this.name = name;
         this.X = X;
         this.Y = Y;
         this.locationOngrid = [0, 0]

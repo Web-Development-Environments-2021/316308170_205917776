@@ -49,11 +49,14 @@ class Pacman extends MoveObject {
             if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 4) {
                 // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
                 document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 5;
+                board.numofballs--;
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 5) {
                 // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
                 document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 15;
+                board.numofballs--;
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 6) {
                 document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 25;
+                board.numofballs--;
                 // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 9) {
                 for (let i = 0; i < ghosts.length; i++) {
@@ -68,7 +71,10 @@ class Pacman extends MoveObject {
                     let random_index = Math.floor(Math.random() * (ghosts.length))
                     ghosts.splice(random_index, 1)
                 } else {
-                    if (ghosts.length < 5) ghosts.push(extra_ghost1)
+                    if (!ex1_in_ghosts){ 
+                        ex1_in_ghosts = true;
+                        ghosts.push(extra_ghost1)
+                    }
                     else ghosts.push(extra_ghost2)
                 }
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 11) {

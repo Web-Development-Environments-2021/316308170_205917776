@@ -1,6 +1,6 @@
 class Ghost extends MoveObject {
-    constructor(X, Y, vx, vy, sx, sy, size) {
-        super(X, Y, vx, vy, 0);
+    constructor(X, Y, vx, vy, sx, sy, size,name) {
+        super(X, Y, vx, vy, 0,name);
         this.original_X = X;
         this.original_Y = Y;
         this.original_vx = vx;

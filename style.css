@@ -429,7 +429,7 @@ b {
 #Lives p {
     color: chartreuse;
     text-align: center;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 #timer {
@@ -463,6 +463,23 @@ label.error {
     -webkit-border-radius: 4px;
 }
 
+
+.game_buttons{
+    position: absolute;
+    top: 390px;
+    left: 20px;
+    margin-left: 1%;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.game_buttons *{
+    margin: 2%;
+    width: 100px;
+}
 
 /* The Modal (background) */
 

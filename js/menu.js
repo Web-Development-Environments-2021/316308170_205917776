@@ -64,8 +64,8 @@ $(document).ready(function () {
 			},
 			email: {
 				required: "Please enter an email address",
-                email : "Please enter an email address",
-				isEmail: "Please enter an email address",
+                email : "Please enter a valid email address",
+				isEmail: "Please enter a valid email address",
                 emailTaken : "Email already taken",
                 maxlength : "Email too long, maximum 50 characters"
 			},
@@ -227,6 +227,11 @@ function generateRandomSettings() {
     let balls = getRandomInt(50, 91);
     let monsters = getRandomInt(1, 5);
     let time = getRandomInt(60, 181);
+    document.getElementById('MoveUp_input').value = "ArrowUp";
+    document.getElementById('MoveDown_input').value = "ArrowDown";
+    document.getElementById('MoveRight_input').value = "ArrowRight";
+    document.getElementById('MoveLeft_input').value = "ArrowLeft";
+
     document.getElementById('slider_value_balls').value = balls;
     document.getElementById('slider_value_monsters').value = monsters;
     document.getElementById('slider_value_time').value = time;
