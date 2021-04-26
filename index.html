@@ -15,9 +15,9 @@
 
     <!-- Navigation Bar -->
     <div class="topnav">
-        <a id="#welcome" onclick="reset_game(); menu('welcome'); m_stop();">Welcome</a>
-        <a id="#register" onclick="reset_game(); menu('register');m_stop();">Register</a>
-        <a id="#login" onclick="reset_game(); menu('login');m_stop();">Log In</a>
+        <a id="#welcome" onclick="reset_game(); menu('welcome'); ">Welcome</a>
+        <a id="#register" onclick="reset_game(); menu('register');">Register</a>
+        <a id="#login" onclick="reset_game(); menu('login');">Log In</a>
         <a id="about" onclick="btn_about()">About</a>
     </div>
     <!-- Content div -->
@@ -251,7 +251,7 @@
                 </div>
                 <div class="game_buttons">
                     <button class="glowing_button" id="reset_game_button" type="submit" onclick="reset_game(); menu('settings');" style="top: 30px;">Reset Game</button>
-                    <button class="glowing_button" id="music_button" onclick="isplay();" style="top: 30px;">music</button>
+                    <button class="glowing_button" id="music_button" onclick="isplay(music);" style="top: 30px;">music</button>
                 </div>
                 <script src="./js/board.js"></script>
                 <script src="./js/MoveObject.js"></script>

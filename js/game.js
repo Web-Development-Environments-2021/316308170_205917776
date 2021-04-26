@@ -14,6 +14,7 @@ var cherry_img = document.createElement("img");
 cherry_img.src = "./images/cherry.png"
 
 var music = new Audio("./music/game_soundtrack.mp3");
+var dead_sfx = new Audio("./music/dead.mp3");
 
 var requestAnimationFrame = window.requestAnimationFrame
 var cancelAnimationFrame = window.cancelAnimationFrame
@@ -121,7 +122,7 @@ function setGameValues() {
     if (isLightColor(color_of_5_balls)) document.getElementById('colorBtn1').style.color = '#000000';
     else document.getElementById('colorBtn1').style.color = '#FFFFFF';
     board.generateRandomBalls(num_of_balls, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
-    m_play();
+    m_play(music);
 }
 
 function checkIfCrash(ghost) {
@@ -146,9 +147,12 @@ function checkIfCrash(ghost) {
         cherry.resetLocation();
         grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
         pacman.resetLocation();
-        if (strikes > 0) alert("gotcha'!");
-        else {
-            music.pause();
+        music.pause();
+        m_play(dead_sfx);
+        if (strikes > 0) {
+            alert("gotcha'!");
+            m_play(music);
+        } else {
             alert("Loser!");
             break_animation = true;
         }
@@ -220,7 +224,7 @@ function reset_game() {
     board.numofballs = -1;
     // stop animation and return to settings
     cancelAnimationFrame(myReq);
-    m_stop()
+    music.pause();
     ex1_in_ghosts = false;
     gameover = false;
 }
@@ -231,17 +235,17 @@ function resetGame() {
     break_animation = false;
 }
 
-function m_play() {
-    music.currentTime = 0;
-    music.play();
+function m_play(sfx) {
+    sfx.currentTime = 0;
+    sfx.play();
 }
 
-function m_stop() { music.pause(); }
-
-function isplay() {
-    if (!music.paused) { music.pause(); } else {
-        music.currentTime = 0;
-        music.play();
+function isplay(sfx) {
+    if (!sfx.paused) {
+        sfx.pause();
+    } else {
+        sfx.currentTime = 0;
+        sfx.play();
     }
 }
 
