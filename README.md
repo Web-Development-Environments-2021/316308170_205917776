@@ -6,13 +6,12 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Game</a>
+      <a href="#about-the-game">About The Game</a>
       <ul>
-        <li><a href="#general-info">Goal</a></li>
-        <li><a href="#built-with">Features</a></li>
+        <li><a href="#goal">Goal</a></li>
+        <li><a href="#features">Features</a></li>
       </ul>
     </li>
-    <li><a href="#features">Features</a></li>
     <li><a href="#website-details">Website Details</a></li>
   </ol>
 </details>
@@ -20,46 +19,27 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## About The Game
 
-[![Product Name Screen Shot][product-photos]](https://web-development-environments-2021.github.io/316308170/#photos)
+[![Product Name Screen Shot][product-game]]
 
-### General Info
-This website is dedicated to my grandfather Eldad :heart:
+### Goal
+You are pacman! run through the maze, avoid the ghosts chasing you, eat as many food as you can
+so you'll gain more points! If you get caught by the ghosts 5 times - you're out!
 
-In the website you can read a little bit about him, check out his photos and favourite songs,
-and if you wish to contact him, you can do so! :smile:
+### Features
 
-
-### Built With
-
-This website was built with the foundations of web development:
-* Html
-* Css
-* Javascript
-
-
-## Features
-
-Send the QR code to your friends so they can visit the website too!
-
-[![Product Name Screen Shot][product-qr]](https://web-development-environments-2021.github.io/316308170/#qrcode)
-
-If you wish to contact Eldad via e-mail, you can do so from the website!
-
-[![Product Name Screen Shot][product-contact]](https://web-development-environments-2021.github.io/316308170/#contact)
+The game cotains 2 main features:
+:pill: 'Green Pill' - the game contains 2 green pills. When pacman eats the pill - all the ghosts slow down for 4 seconds! Use that to get away from complicated situation! :satisfied:
+:pill: 'Red Pill' - the game contains 2 red pills. When pacman eats the pill - by 50% one of the ghosts will disappear. But be careful! on the other 50% - another ghost will join the game! :ghost:
 
 
 ## Website Details
 
-Developer: Ariel Shilo
+Developers: Ariel Shilo, Gal Alkalay
 
-ID: 316308170
+IDs: 316308170, 205917776
 
-Visit Website: [Click here!](https://web-development-environments-2021.github.io/316308170/)
+Visit Website: [Click here!](https://web-development-environments-2021.github.io/316308170_205917776/)
 
-
-
-[product-photos]: images/web-photos.png
-[product-qr]: images/web-qr.png
-[product-contact]: images/web-contact.png
+[product-game]: images/game_snapshot.png
