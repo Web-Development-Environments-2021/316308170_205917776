@@ -29,9 +29,10 @@ so you'll gain more points! If you get caught by the ghosts 5 times - you're out
 
 ### Features
 
-The game cotains 2 main features:\
+The game cotains 3 main features:\
 :pill: 'Green Pill' - the game contains 2 green pills. When pacman eats the pill - all the ghosts slow down for 4 seconds! Use that to get away from complicated situation! :satisfied:\
-:pill: 'Red Pill' - the game contains 2 red pills. When pacman eats the pill - by 50% one of the ghosts will disappear. But be careful! on the other 50% - another ghost will join the game! :ghost:
+:pill: 'Red Pill' - the game contains 2 red pills. When pacman eats the pill - by 50% one of the ghosts will disappear. But be careful! on the other 50% - another ghost will join the game! :ghost:\
+:cherries: 'Cherry' - worth 50 points! try to catch it with pacman, but be ware! Cherry will not come to you so easy!
 
 
 ## Website Details
