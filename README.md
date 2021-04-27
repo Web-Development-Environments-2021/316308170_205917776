@@ -21,7 +21,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Game
 
-[product-game]
+![Product Name Screen Shot][product-game]
 
 ### Goal
 You are pacman! run through the maze, avoid the ghosts chasing you, eat as many food as you can
