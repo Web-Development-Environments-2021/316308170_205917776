@@ -21,7 +21,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Game
 
-[![Product Name Screen Shot][product-game]]
+[product-game]
 
 ### Goal
 You are pacman! run through the maze, avoid the ghosts chasing you, eat as many food as you can
@@ -29,8 +29,8 @@ so you'll gain more points! If you get caught by the ghosts 5 times - you're out
 
 ### Features
 
-The game cotains 2 main features:
-:pill: 'Green Pill' - the game contains 2 green pills. When pacman eats the pill - all the ghosts slow down for 4 seconds! Use that to get away from complicated situation! :satisfied:
+The game cotains 2 main features:\
+:pill: 'Green Pill' - the game contains 2 green pills. When pacman eats the pill - all the ghosts slow down for 4 seconds! Use that to get away from complicated situation! :satisfied:\
 :pill: 'Red Pill' - the game contains 2 red pills. When pacman eats the pill - by 50% one of the ghosts will disappear. But be careful! on the other 50% - another ghost will join the game! :ghost:
 
 
