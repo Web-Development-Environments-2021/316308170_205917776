@@ -151,8 +151,8 @@ class Board {
                     context.lineWidth = 2;
                     context.strokeStyle = "yellow";
                     context.stroke();
-                } 
-                
+                }
+
 
                 // context.font = '6px'
                 // context.fillStyle = "white"; //color

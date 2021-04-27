@@ -33,43 +33,63 @@
             <h1>Sign Up</h1>
             <form id='register_form'>
                 <div class="menu_field">
-                    <div class="text_left">
-                        <label for="username">Username:</label>
+                    <div class="login_text" style="left:28%;">
+                        <div class="text_left">
+                            <label for="username">Username:</label>
+                        </div>
                     </div>
-                    <div class="field_right">
-                        <input type="text" placeholder="Username" name="username" id="r_username">
-                    </div>
-                </div>
-                <div class="menu_field">
-                    <div class="text_left">
-                        <label for="password">Password:</label>
-                    </div>
-                    <div class="field_right">
-                        <input type="password" placeholder="Password" name="password" id="r_password">
+                    <div class="login_field" style="right:20%;">
+                        <div class="field_right">
+                            <input type="text" placeholder="Username" name="username" id="r_username">
+                        </div>
                     </div>
                 </div>
                 <div class="menu_field">
-                    <div class="text_left">
-                        <label for="full_name">Full Name:</label>
+                    <div class="login_text" style="left:28%;">
+                        <div class="text_left">
+                            <label for="password">Password:</label>
+                        </div>
                     </div>
-                    <div class="field_right">
-                        <input type="text" placeholder="Full Name" name="full_name" id="r_full_name">
-                    </div>
-                </div>
-                <div class="menu_field">
-                    <div class="text_left">
-                        <label for="email">Email:</label>
-                    </div>
-                    <div class="field_right">
-                        <input type="email" placeholder="Email" name="email" id="r_email">
+                    <div class="login_field" style="right:20%;">
+                        <div class="field_right">
+                            <input type="password" placeholder="Password" name="password" id="r_password">
+                        </div>
                     </div>
                 </div>
                 <div class="menu_field">
-                    <div class="text_left">
-                        <label for="birthdate">Birth Date:</label>
+                    <div class="login_text" style="left:28%;">
+                        <div class="text_left">
+                            <label for="full_name">Full Name:</label>
+                        </div>
                     </div>
-                    <div class="field_right">
-                        <input type="date" placeholder="birthdate" name="birthdate" id="r_birthdate">
+                    <div class="login_field" style="right:20%;">
+                        <div class="field_right">
+                            <input type="text" placeholder="Full Name" name="full_name" id="r_full_name">
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_field">
+                    <div class="login_text" style="left:28%;">
+                        <div class="text_left">
+                            <label for="email">Email:</label>
+                        </div>
+                    </div>
+                    <div class="login_field" style="right:20%;">
+                        <div class="field_right">
+                            <input type="email" placeholder="Email" name="email" id="r_email">
+                        </div>
+                    </div>
+                </div>
+                <div class="menu_field">
+                    <div class="login_text" style="left:28%;">
+                        <div class="text_left">
+                            <label for="birthdate">Birth Date:</label>
+                        </div>
+                    </div>
+                    <div class="login_field" style="right:20%;">
+                        <div class="field_right">
+                            <input type="date" placeholder="birthdate" name="birthdate" id="r_birthdate">
+                        </div>
                     </div>
                 </div>
                 <button class="glowing_button" type="submit" style="top: 30px;">Sign Up</button>
@@ -80,24 +100,32 @@
             <h1>Log In</h1>
             <form id='login_form'>
                 <div class="menu_field">
-                    <div class="text_left">
-                        <label for="username">Username:</label>
+                    <div class="login_text" style="left:30%;">
+                        <div class="text_left">
+                            <label for="username">Username:</label>
+                        </div>
                     </div>
-                    <div class="field_right">
-                        <input type="text" placeholder="Username" name="username" id="l_username">
+                    <div class="login_field" style="right:20%;">
+                        <div class="field_right">
+                            <input type="text" placeholder="Username" name="username" id="l_username">
+                        </div>
                     </div>
                 </div>
                 <div class="menu_field">
-                    <div class="text_left">
-                        <label for="password">Password:</label>
+                    <div class="login_text" style="left:30%;">
+                        <div class="text_left">
+                            <label for="password">Password:</label>
+                        </div>
                     </div>
-                    <div class="field_right">
-                        <input type="password" placeholder="Password" name="password" id="l_password">
+                    <div class="login_field" style="right:20%;">
+                        <div class="field_right">
+                            <input type="password" placeholder="Password" name="password" id="l_password">
+                        </div>
                     </div>
                 </div>
 
                 <br>
-                <button class="glowing_button" type="submit" id="b_login" onclick="menu('settings')">Log In</button>
+                <button class="glowing_button" type="submit" id="b_login">Log In</button>
                 <!-- remove onclick -->
             </form>
         </div>
@@ -112,8 +140,8 @@
                 <div class="modal-body">
                     <p><b>Developers:</b> Ariel Shilo & Gal Alakalay <br> JQuery Plugin used for this game:
                         <a href="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"><u>additional-methods</u></a>,
-                        <a href="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"><u>Validate.</u></a> <br> Button's template taken from <a href="https://codepen.io/kocsten/pen/rggjXp"><u>here.</u></a><br> About modal window taken
-                        from <a href="https://www.w3schools.com/howto/howto_css_modals.asp"><u>here.</u></a><br> Difficulties we've engaged with during the development process: <br>
+                        <a href="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"><u>Validate.</u></a> <br> Button's template taken from <a href="https://codepen.io/kocsten/pen/rggjXp"><u>here.</u></a><br> About modal window template
+                        taken from <a href="https://www.w3schools.com/howto/howto_css_modals.asp"><u>here.</u></a><br><br> Difficulties we've engaged with during the development process: <br>
                         <ul>
                             <li>
                                 Responsiveness vs. Collision Detection: while testing our game in different screens size, we've struggled to adjust the characters collision with the walls to the screen pixels resolution.
@@ -133,60 +161,76 @@
         <div class="settings">
             <h1>Settings</h1>
             <div id="settings_button_div">
-                <div class="text_left">
-                    <label for="ArrowUp">Move Up:</label>
+                <div class="login_text" style="left:20%;">
+                    <div class="text_left">
+                        <label for="ArrowUp">Move Up:</label>
+                    </div>
                 </div>
-                <div class="field_right">
-                    <input class="key_button" type="button" name="key_button" value="ArrowUp" id="MoveUp_input" onclick="updateKeyControls('MoveUp_input')" required>
-                </div>
-            </div>
-            <div id="settings_button_div">
-                <div class="text_left">
-                    <label for="ArrowDown">Move Down:</label>
-                </div>
-                <div class="field_right">
-                    <input class="key_button" type="button" name="key_button" value="ArrowDown" id="MoveDown_input" onclick="updateKeyControls('MoveDown_input')" required>
+                <div class="login_field" style="right:20%;">
+                    <div class="field_right">
+                        <input class="key_button" type="button" name="key_button" value="ArrowUp" id="MoveUp_input" onclick="updateKeyControls('MoveUp_input')" required>
+                    </div>
                 </div>
             </div>
             <div id="settings_button_div">
-                <div class="text_left">
-                    <label for="ArrowRight">Move Right:</label>
+                <div class="login_text" style="left:20%;">
+                    <div class="text_left">
+                        <label for="ArrowDown">Move Down:</label>
+                    </div>
                 </div>
-                <div class="field_right">
-                    <input class="key_button" type="button" name="key_button" value="ArrowRight" id="MoveRight_input" onclick="updateKeyControls('MoveRight_input')" required>
+                <div class="login_field" style="right:20%;">
+                    <div class="field_right">
+                        <input class="key_button" type="button" name="key_button" value="ArrowDown" id="MoveDown_input" onclick="updateKeyControls('MoveDown_input')" required>
+                    </div>
                 </div>
             </div>
             <div id="settings_button_div">
-                <div class="text_left">
-                    <label for="ArrowLeft">Move Left:</label>
+                <div class="login_text" style="left:20%;">
+                    <div class="text_left">
+                        <label for="ArrowRight">Move Right:</label>
+                    </div>
                 </div>
-                <div class="field_right">
-                    <input class="key_button" type="button" name="key_button" value="ArrowLeft" id="MoveLeft_input" onclick="updateKeyControls('MoveLeft_input')" required>
+                <div class="login_field" style="right:20%;">
+                    <div class="field_right">
+                        <input class="key_button" type="button" name="key_button" value="ArrowRight" id="MoveRight_input" onclick="updateKeyControls('MoveRight_input')" required>
+                    </div>
                 </div>
             </div>
-            <div class="slidecontainer">
-                <div class="text_left">
+            <div id="settings_button_div">
+                <div class="login_text" style="left:20%;">
+                    <div class="text_left">
+                        <label for="ArrowLeft">Move Left:</label>
+                    </div>
+                </div>
+                <div class="login_field" style="right:20%;">
+                    <div class="field_right">
+                        <input class="key_button" type="button" name="key_button" value="ArrowLeft" id="MoveLeft_input" onclick="updateKeyControls('MoveLeft_input')" required>
+                    </div>
+                </div>
+            </div>
+            <div class="slidecontainer" style="margin-top: 3%;">
+                <div class="text_left" style="left: 19.5%;">
                     <label>Choose number of balls in game:</label>
                 </div>
-                <div class="field_right">
+                <div class="field_right" style="right: -10%;">
                     <input type="range" id=slider_bar_balls name="rangeInput" min="50" max="90" oninput="updateTextInput(this.value, 'slider_value_balls');">
                     <input type="text" id="slider_value_balls" value="70" readonly="readonly" style="width:30px; text-align:center">
                 </div>
             </div>
-            <div class="slidecontainer">
-                <div class="text_left">
+            <div class="slidecontainer" style="margin-top: -1%;">
+                <div class="text_left" style="left: 19.5%;">
                     <label>Choose number of monsters in game:</label>
                 </div>
-                <div class="field_right">
+                <div class="field_right" style="right: -10%;">
                     <input type="range" id=slider_bar_monsters name="rangeInput" min="1" max="4" oninput="updateTextInput(this.value, 'slider_value_monsters');">
                     <input type="text" id="slider_value_monsters" value="3" readonly="readonly" style="width:30px; text-align:center">
                 </div>
             </div>
-            <div class="slidecontainer">
-                <div class="text_left">
+            <div class="slidecontainer" style="margin-top: -1%;">
+                <div class="text_left" style="left: 19.5%;">
                     <label>Choose number of seconds to play:</label>
                 </div>
-                <div class="field_right">
+                <div class="field_right" style="right: -10%;">
                     <input type="range" id=slider_bar_time name="rangeInput" min="60" max="180" oninput="updateTextInput(this.value, 'slider_value_time');">
                     <input type="text" id="slider_value_time" value="90" readonly="readonly" style="width:30px; text-align:center">
                 </div>
@@ -209,15 +253,15 @@
                 <canvas id="canvas" width="1920" height="1080"></canvas>
                 <div id="username_display">
                     <p>Online User:&nbsp</p>
-                    <p id="online_username_display"></p>
+                    <p id="online_username_display"><b></b></p>
                 </div>
                 <div id="score">
                     <p>Score:&nbsp</p>
-                    <p id="score_number">0</p>
+                    <p id="score_number" style="color: rgb(240, 255, 102);">0</p>
                 </div>
                 <div id="timer">
                     <p>Time:&nbsp</p>
-                    <p id="timer_count"></p>
+                    <p id="timer_count" style="color: rgb(240, 255, 102);"></p>
                 </div>
                 <div id="move_keys">
                     <p>Chosen move keys:</p>

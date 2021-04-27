@@ -79,6 +79,7 @@ cherry.locationOngrid = [14, 17];
 
 
 function setGameValues() {
+    m_play(music);
     goUp = document.getElementById('MoveUp_input').value;
     goDown = document.getElementById('MoveDown_input').value;
     goRight = document.getElementById('MoveRight_input').value;
@@ -122,11 +123,12 @@ function setGameValues() {
     if (isLightColor(color_of_5_balls)) document.getElementById('colorBtn1').style.color = '#000000';
     else document.getElementById('colorBtn1').style.color = '#FFFFFF';
     board.generateRandomBalls(num_of_balls, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
-    m_play(music);
 }
 
 function checkIfCrash(ghost) {
     if (pacman.locationOngrid[0] == ghost.locationOngrid[0] && pacman.locationOngrid[1] == ghost.locationOngrid[1]) {
+        music.pause();
+        m_play(dead_sfx);
         document.getElementById('life' + strikes).style.display = "none";
         strikes--;
         document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) - 10;
@@ -147,8 +149,6 @@ function checkIfCrash(ghost) {
         cherry.resetLocation();
         grid[pacman.locationOngrid[1]][pacman.locationOngrid[0]] = 0;
         pacman.resetLocation();
-        music.pause();
-        m_play(dead_sfx);
         if (strikes > 0) {
             alert("gotcha'!");
             m_play(music);
@@ -200,6 +200,7 @@ function animate() {
 
 function reset_game() {
     // reset ghosts
+    ghosts.splice(0, ghosts.length)
     ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost]
     for (let i = 0; i < ghosts.length; i++) {
         let curr_ghost = ghosts[i]
@@ -251,8 +252,8 @@ function isplay(sfx) {
 
 
 window.addEventListener('keydown', function(e) {
-        if (e.code === 'Space') break_animation = true;
-        else if (e.key === goUp) pacman.setVelocity(0, -velocity);
+        if (e.code == 'Space') break_animation = true;
+        if (e.key === goUp) pacman.setVelocity(0, -velocity);
         else if (e.key === goDown) pacman.setVelocity(0, velocity);
         else if (e.key === goLeft) pacman.setVelocity(-velocity, 0);
         else if (e.key === goRight) pacman.setVelocity(velocity, 0);

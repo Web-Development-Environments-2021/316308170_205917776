@@ -5,7 +5,9 @@ var key_left = "ArrowLeft";
 var key_right = "ArrowRight";
 var key_is_pressed = false
 var key_buttons = document.getElementsByName('key_button');
-var users_DB = new Map([["k",["k","k k","k@k.com","1/1/95"]]]) // user & passwords dictionary {user : [password,fullname,email,birthday]}
+var users_DB = new Map([
+        ["k", ["k", "k k", "k@k.com", "1/1/95"]]
+    ]) // user & passwords dictionary {user : [password,fullname,email,birthday]}
 const k_mail = ["k@k.com"];
 var mails_DB = new Set(k_mail);
 var online_user = "";
@@ -13,82 +15,82 @@ var online_user = "";
 // for gal wanted to add set for mail's and check all the other things 
 // need to remove login skip after finish the game ( onclick(main(..))
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-	// register validation
-	$("#register_form").validate({
-		rules: {
-			username: {
-				required: true,
-				validUsername: true,
-                maxlength : 20
-			},
-			password: {
-				required: true,
-                minlength : 6,
-                maxlength : 20,
-				strongPassword: true
-			},
-			full_name: {
-				required: true,
-				letterswithspace: true,
-                maxlength : 50
-			},
-			email: {
-				required: true,
-				email: true,
-                isEmail : true,
-                emailTaken : true,
-                maxlength : 50
-			},
-			birthdate: {
-				required: true
-			}
-		},
-		messages: {
-			username: {
-				required: "Please enter valid username",
-				validUsername: "Username already taken",
-                maxlength : "Username max length is 20"
-			},
-			password: {
-				required: "Please enter an password",
-				strongPassword: "Password MUST contain at least one character and one number",
-                minlength : "Password too short, minimum 6 characters",
-                maxlength :"Password too long, maximum 20 characters",
-			},
-			full_name: {
-				required: "Please enter a name",
-				letterswithspace: "Full name can be only letters",
-                maxlength :"Fullname too long, maximum 50 characters"
-			},
-			email: {
-				required: "Please enter an email address",
-                email : "Please enter a valid email address",
-				isEmail: "Please enter a valid email address",
-                emailTaken : "Email already taken",
-                maxlength : "Email too long, maximum 50 characters"
-			},
-			birthdate: {
-				required: "Please enter a birthday"
-			}
-		},
-		submitHandler: function () {
+    // register validation
+    $("#register_form").validate({
+        rules: {
+            username: {
+                required: true,
+                validUsername: true,
+                maxlength: 20
+            },
+            password: {
+                required: true,
+                minlength: 6,
+                maxlength: 20,
+                strongPassword: true
+            },
+            full_name: {
+                required: true,
+                letterswithspace: true,
+                maxlength: 50
+            },
+            email: {
+                required: true,
+                email: true,
+                isEmail: true,
+                emailTaken: true,
+                maxlength: 50
+            },
+            birthdate: {
+                required: true
+            }
+        },
+        messages: {
+            username: {
+                required: "Please enter valid username",
+                validUsername: "Username already taken",
+                maxlength: "Username max length is 20"
+            },
+            password: {
+                required: "Please enter an password",
+                strongPassword: "Password MUST contain at least one character and one number",
+                minlength: "Password too short, minimum 6 characters",
+                maxlength: "Password too long, maximum 20 characters",
+            },
+            full_name: {
+                required: "Please enter a name",
+                letterswithspace: "Full name can be only letters",
+                maxlength: "Fullname too long, maximum 50 characters"
+            },
+            email: {
+                required: "Please enter an email address",
+                email: "Please enter a valid email address",
+                isEmail: "Please enter a valid email address",
+                emailTaken: "Email already taken",
+                maxlength: "Email too long, maximum 50 characters"
+            },
+            birthdate: {
+                required: "Please enter a birthday"
+            }
+        },
+        submitHandler: function() {
             alert("registered successfully :D !")
             let t_username = document.getElementById("r_username").value;
-	        let t_password = document.getElementById("r_password").value;
+            let t_password = document.getElementById("r_password").value;
             let t_fullname = document.getElementById("r_full_name").value;
-	        let t_email = document.getElementById("r_email").value;
+            let t_email = document.getElementById("r_email").value;
             let t_birthdate = document.getElementById("r_birthdate").value;
-            users_DB.set(t_username,[t_password,t_fullname,t_email,t_birthdate]);
+            users_DB.set(t_username, [t_password, t_fullname, t_email, t_birthdate]);
             mails_DB.add(t_email)
-            menu('login')      
-			cleatText('register');
-		},
-	});
+            menu('login')
+            clearText('register');
+        },
+    });
 
-	//login validation
-    $('#b_login').click( function() {     
+    //login validation
+    $('#b_login').click(function() {
         $("#login_form").validate({
             rules: {
                 username: {
@@ -106,55 +108,51 @@ $(document).ready(function () {
                     required: "Please enter an password"
                 }
             },
-            submitHandler: function () {
+            submitHandler: function() {
                 let username_input = document.getElementById("l_username").value;
                 let password_input = document.getElementById("l_password").value;
                 let user_password = users_DB.get(username_input); // password of the user
-                if(user_password != null && user_password[0] === password_input) { 
+                if (user_password != null && user_password[0] === password_input) {
                     online_user = username_input;
                     menu('settings');
-                    cleatText('login');
-                }
-                else{
+                    clearText('login');
+                } else {
                     alert("Username or password is not valid")
-                    cleatText('login');
+                    clearText('login');
                 }
             },
-            // invalidHandler : function(event,validator){
-                
-            // },
         });
     });
 });
 $(function() {
 
-	// register check
-	$.validator.addMethod('strongPassword', function (pass) {
-		return /\d/.test(pass) && /[a-z]/i.test(pass);
-	});
+    // register check
+    $.validator.addMethod('strongPassword', function(pass) {
+        return /\d/.test(pass) && /[a-z]/i.test(pass);
+    });
 
-	$.validator.addMethod('validUsername', function (newUser) {
-		return !(users_DB.has(newUser));
-	});
+    $.validator.addMethod('validUsername', function(newUser) {
+        return !(users_DB.has(newUser));
+    });
 
-    $.validator.addMethod('isEmail',function (mail){
+    $.validator.addMethod('isEmail', function(mail) {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(mail);
     });
 
-    $.validator.addMethod('emailTaken',function (mail){
+    $.validator.addMethod('emailTaken', function(mail) {
         return !(mails_DB.has(mail))
     });
 
-    $.validator.addMethod('letterswithspace',function (fullname){  
-        var RegExpression = /^[a-zA-Z\s]*$/;  
+    $.validator.addMethod('letterswithspace', function(fullname) {
+        var RegExpression = /^[a-zA-Z\s]*$/;
         return RegExpression.test(fullname)
     });
 
 });
 
-function cleatText(form){
-    $("#"+form +'_form').trigger("reset")
+function clearText(form) {
+    $("#" + form + '_form').trigger("reset")
 }
 
 function disableOtherButtons(activeButton) {
@@ -357,22 +355,22 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
 function btn_about() {
-  modal.style.display = "block";
+    modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-  modal.style.display = "none";
+    modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
-window.addEventListener('keydown' , function(event) {
+window.addEventListener('keydown', function(event) {
     if (event.key == 'Escape') {
         modal.style.display = "none";
     }
-  })
+})
