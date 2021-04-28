@@ -1,6 +1,6 @@
 class Ghost extends MoveObject {
-    constructor(X, Y, vx, vy, sx, sy, size,name) {
-        super(X, Y, vx, vy, 0,name);
+    constructor(X, Y, vx, vy, sx, sy, size, name) {
+        super(X, Y, vx, vy, 0, name);
         this.original_X = X;
         this.original_Y = Y;
         this.original_vx = vx;
@@ -33,12 +33,6 @@ class Ghost extends MoveObject {
 
     isValidCoordinate(x, y, current_path) {
         return x >= 0 && y >= 0 && x < board.length && y < board.length && board[x][y] == 0 && !([x, y] in current_path);
-    }
-
-    calc_manhatten_dist(pacman_location, i, j) {
-        let coor_x = pacman_location[0];
-        let coor_y = pacman_location[1];
-        return Math.abs(this.locationOngrid[0] + i) - coor_x + Math.abs(this.locationOngrid[1] + j) - coor_y;
     }
 
     next_move() {
@@ -89,9 +83,8 @@ class Ghost extends MoveObject {
     }
 
     update() {
-        // let neighbor = this.find_path_to_pacman(pacman.locationOngrid)
         // get directions by order - best to worst
-        let check_if_edge = this.checkIfEdge(); //check if teleport pacman to other side.
+        let check_if_edge = this.checkIfEdge(); //check if teleport to other side.
         if (check_if_edge != false) {
             this.X = check_if_edge[0];
         }
@@ -113,13 +106,8 @@ class Ghost extends MoveObject {
             }
 
         }
-        // let prev_value = grid[prev_location[1]][prev_location[0]]
-
         this.locationOngrid = board.getLocation([this.X, this.Y]); //return the last location accurate on grid [x,y]
-        // grid[prev_location[1]][prev_location[0]] = prev_value;
     }
-
-
 
     changeDirection(vx, vy) {
         if (vx > 0) { //right

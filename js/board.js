@@ -10,6 +10,8 @@
  * 7 - empty zone
  * 8 - teleport cell
  * 9 - sour sweet candy
+ * 10 - ghost candy
+ * 11 - cherry
  */
 
 
@@ -94,6 +96,7 @@ class Board {
         }
         if (this.sour_sweet_growth) this.sour_sweet_candy_size++;
         else this.sour_sweet_candy_size--;
+        let num_of_current_balls = 0;
         for (var i = 0; i < this.width; i++) {
             for (var j = 0; j < this.height; j++) {
                 if (grid[i][j] == 3) {
@@ -102,6 +105,7 @@ class Board {
                     context.fillStyle = "blue"; //color
                     context.fill();
                 } else if (grid[i][j] == 4) {
+                    num_of_current_balls++;
                     let pixel_xy = this.getPixel([j, i])
                     context.beginPath();
                     context.arc(pixel_xy[0] + pacman.body_radius + 2, pixel_xy[1] + pacman.body_radius + 2, pacman.body_radius - 4, 0 * Math.PI, 2 * Math.PI); // full circle
@@ -112,6 +116,8 @@ class Board {
                     context.strokeStyle = "white";
                     context.stroke();
                 } else if (grid[i][j] == 5) {
+                    num_of_current_balls++;
+
                     let pixel_xy = this.getPixel([j, i])
                     context.beginPath();
                     context.arc(pixel_xy[0] + pacman.body_radius + 2, pixel_xy[1] + pacman.body_radius + 2, pacman.body_radius - 4, 0 * Math.PI, 2 * Math.PI); // full circle
@@ -122,6 +128,8 @@ class Board {
                     context.strokeStyle = "white";
                     context.stroke();
                 } else if (grid[i][j] == 6) {
+                    num_of_current_balls++;
+
                     let pixel_xy = this.getPixel([j, i])
                     context.beginPath();
                     context.arc(pixel_xy[0] + pacman.body_radius + 2, pixel_xy[1] + pacman.body_radius + 2, pacman.body_radius - 4, 0 * Math.PI, 2 * Math.PI); // full circle
@@ -152,15 +160,10 @@ class Board {
                     context.strokeStyle = "yellow";
                     context.stroke();
                 }
-
-
-                // context.font = '6px'
-                // context.fillStyle = "white"; //color
-                // context.fillText(grid[i][j], this.startLocation[0] + this.wall_size * j + 4.5, this.startLocation[1] + this.wall_size * i + 12);
             }
         }
-        /// test the grid numbers!
-
+        // handle gap between board.numofballs to the drawed ones.
+        if (game_started && board.numofballs != num_of_current_balls) board.numofballs = num_of_current_balls;
     }
 
     isCorner(i, j) {
@@ -213,6 +216,7 @@ class Board {
                 }
             }
         }
+        // recursive call if more balls remain.
         if (balls_remain > 0 || num_of_sour_sweet_candies > 0 || num_of_ghost_candy > 0) this.generateRandomBalls(balls_remain, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
     }
 }

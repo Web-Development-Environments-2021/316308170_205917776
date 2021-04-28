@@ -1,3 +1,4 @@
+// Canvas configuration
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 var wall_size = 18;
@@ -7,22 +8,21 @@ var scale = window.devicePixelRatio
 canvas.width = canvas_width * scale;
 canvas.height = canvas_height * scale;
 context.scale(scale, scale);
+
+// Load images and music
 var ghost_img = document.createElement("img");
 ghost_img.src = "./images/ghosts.png"
-
 var cherry_img = document.createElement("img");
 cherry_img.src = "./images/cherry.png"
-
 var music = new Audio("./music/game_soundtrack.mp3");
 var dead_sfx = new Audio("./music/dead.mp3");
 
+// Handle animation
 var requestAnimationFrame = window.requestAnimationFrame
 var cancelAnimationFrame = window.cancelAnimationFrame
 var myReq;
 
-// ghost sprite size (160,160) space (30), space to other ghost (50,30)
-
-
+// Initialize relevant variables
 var break_animation = false;
 var goUp = 'ArrowUp';
 var goDown = 'ArrowDown';
@@ -37,6 +37,8 @@ var timer_count = 0;
 var strikes = 5;
 var got_pacman = false;
 var board = new Board([0, 0], wall_size);
+var game_started = false;
+var gameover = false;
 
 function generateRandomPosition() {
     let i = 5 + Math.floor(Math.random() * (grid.length - 10))
@@ -45,10 +47,13 @@ function generateRandomPosition() {
     else return [i, j]
 }
 
+// Generate pacman, ghosts and cherry
 var pacman_start = board.getPixel(generateRandomPosition())
 var pacman = new Pacman(pacman_start[0] + (wall_size / 2), pacman_start[1] + (wall_size / 2), 0, 0, wall_size / 2);
 pacman.locationOngrid = board.getLocation([pacman.X, pacman.Y]);
 
+
+// ghost sprite size (160,160) space (30), space to other ghost (50,30)
 var red_ghost_start = board.getPixel([1, 1])
 var red_ghost = new Ghost(red_ghost_start[0], red_ghost_start[1], ghost_velocity, 0, 0, 0, wall_size, "red");
 red_ghost.locationOngrid = board.getLocation([red_ghost.X, red_ghost.Y]);
@@ -72,12 +77,11 @@ extra_ghost2.locationOngrid = board.getLocation([extra_ghost2.X, extra_ghost2.Y]
 var ghosts = [red_ghost, pink_ghost, blue_ghost, orange_ghost] //should be random
 var ex1_in_ghosts = false;
 
-
 var cherry_start = board.getPixel([14, 17])
 var cherry = new Cherry(cherry_start[0], cherry_start[1], velocity * 0.75, 0, 0, 0, wall_size);
 cherry.locationOngrid = [14, 17];
 
-
+// Called any time moving from settings window to game window.
 function setGameValues() {
     m_play(music);
     goUp = document.getElementById('MoveUp_input').value;
@@ -92,7 +96,7 @@ function setGameValues() {
     document.getElementById('score_number').innerHTML = 0;
     var num_of_balls = document.getElementById('slider_value_balls').value;
     var num_of_ghosts = document.getElementById('slider_value_monsters').value;
-    // remove random shots - depends on num_of_ghosts given.
+    // remove random ghots - depends on num_of_ghosts given.
     for (let i = 0; i < 4 - num_of_ghosts; i++) {
         random_index = Math.floor(Math.random() * (4 - i))
         ghosts.splice(random_index, 1)
@@ -105,6 +109,7 @@ function setGameValues() {
     var num_of_15_balls = Math.floor(0.3 * num_of_balls);
     var num_of_25_balls = Math.floor(0.1 * num_of_balls);
     board.numofballs = num_of_balls;
+    game_started = true;
     color_of_5_balls = document.getElementById('color1').value;
     color_of_15_balls = document.getElementById('color2').value;
     color_of_25_balls = document.getElementById('color3').value;
@@ -125,6 +130,7 @@ function setGameValues() {
     board.generateRandomBalls(num_of_balls, num_of_5_balls, num_of_15_balls, num_of_25_balls, num_of_sour_sweet_candies, num_of_ghost_candy);
 }
 
+// Called every frame, check if pacman crashed a ghost and finish game.
 function checkIfCrash(ghost) {
     if (pacman.locationOngrid[0] == ghost.locationOngrid[0] && pacman.locationOngrid[1] == ghost.locationOngrid[1]) {
         music.pause();
@@ -159,8 +165,8 @@ function checkIfCrash(ghost) {
     }
 }
 
-var gameover = false;
-
+// function called every frame, draw all relevant classes.
+// handles the time passed, and if finished, handle winning conditions.
 function animate() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     board.draw();
@@ -197,7 +203,7 @@ function animate() {
     myReq = requestAnimationFrame(animate);
 }
 
-
+// reset relevant game classes.
 function reset_game() {
     // reset ghosts
     ghosts.splice(0, ghosts.length)
@@ -207,13 +213,6 @@ function reset_game() {
         grid[curr_ghost.locationOngrid[1]][curr_ghost.locationOngrid[0]] = 0;
         curr_ghost.resetLocation();
     }
-    // remove extra ghosts
-    // for (let i = 0; i < ghosts.length; i++) {
-    //     if (ghosts[i] == extra_ghost1 || ghosts[i] == extra_ghost2) {
-    //         ghosts.splice(i, 1)
-    //         console.log('here')
-    //     }
-    // }
     // reset cherry and pacman
     grid[cherry.locationOngrid[1]][cherry.locationOngrid[0]] = 0;
     cherry.resetLocation();
@@ -228,10 +227,11 @@ function reset_game() {
     music.pause();
     ex1_in_ghosts = false;
     gameover = false;
+    game_started = false;
 }
 
 
-function resetGame() {
+function BreakAnimation() {
     break_animation = true;
     break_animation = false;
 }
@@ -250,21 +250,10 @@ function isplay(sfx) {
     }
 }
 
-
+// Handle key events, moving pacman.
 window.addEventListener('keydown', function(e) {
-        if (e.code == 'Space') break_animation = true;
-        if (e.key === goUp) pacman.setVelocity(0, -velocity);
-        else if (e.key === goDown) pacman.setVelocity(0, velocity);
-        else if (e.key === goLeft) pacman.setVelocity(-velocity, 0);
-        else if (e.key === goRight) pacman.setVelocity(velocity, 0);
-    })
-    // board.generateBoard();
-
-
-// const reloadtButton = document.querySelector("#reload");
-// // Reload everything:
-// function reload() {
-//     reload = location.reload();
-// }
-// // Event listeners for reload
-// reloadButton.addEventListener("click", reload, false);
+    if (e.key === goUp) pacman.setVelocity(0, -velocity);
+    else if (e.key === goDown) pacman.setVelocity(0, velocity);
+    else if (e.key === goLeft) pacman.setVelocity(-velocity, 0);
+    else if (e.key === goRight) pacman.setVelocity(velocity, 0);
+})

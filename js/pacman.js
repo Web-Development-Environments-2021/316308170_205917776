@@ -3,8 +3,6 @@ class Pacman extends MoveObject {
         super(X, Y, vx, vy, center_point);
         this.original_X = X;
         this.original_Y = Y;
-        // this.width = 20;
-        // this.height = 20;
         this.body_radius = wall_size * 8 / 20;
         this.start_angle = 0.15;
         this.finish_angle = 1.85;
@@ -26,13 +24,12 @@ class Pacman extends MoveObject {
     }
 
     update() {
-        // if (this.Y + this.vx > board.wall_size) {
         if (got_pacman) return
         if (this.collisionDetection()) {
             this.vx = 0;
             this.vy = 0;
         }
-        if (!this.checkForTurnCollision(this.next_vx, this.next_vy)) { // true - false 
+        if (!this.checkForTurnCollision(this.next_vx, this.next_vy)) {
             this.vx = this.next_vx;
             this.vy = this.next_vy;
             this.changeDirection(this.vx, this.vy);
@@ -45,19 +42,17 @@ class Pacman extends MoveObject {
         this.Y += this.vy;
         let prev_location = this.locationOngrid;
         this.locationOngrid = board.getLocation([this.X, this.Y]); //return the last location accurate on grid [x,y]
+        // Check if pacman moved a cell on the grid. handle what pacman encounters.
         if (!(prev_location[0] == this.locationOngrid[0] && prev_location[1] == this.locationOngrid[1])) {
             if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 4) {
-                // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
                 document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 5;
                 board.numofballs--;
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 5) {
-                // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
                 document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 15;
                 board.numofballs--;
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 6) {
                 document.getElementById('score_number').innerHTML = parseInt(document.getElementById('score_number').innerHTML) + 25;
                 board.numofballs--;
-                // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 9) {
                 for (let i = 0; i < ghosts.length; i++) {
                     ghosts[i].setVelocity(ghosts[i].velocity / 4)
@@ -65,7 +60,6 @@ class Pacman extends MoveObject {
                         if (typeof ghosts[i] !== 'undefined') ghosts[i].setVelocity(ghosts[i].velocity)
                     }, 4000)
                 }
-                // grid[this.locationOngrid[1]][this.locationOngrid[0]] = 0;
             } else if (grid[this.locationOngrid[1]][this.locationOngrid[0]] == 10) {
                 if (Math.random() < 0.5) {
                     let random_index = Math.floor(Math.random() * (ghosts.length))

@@ -12,9 +12,6 @@ const k_mail = ["k@k.com"];
 var mails_DB = new Set(k_mail);
 var online_user = "";
 
-// for gal wanted to add set for mail's and check all the other things 
-// need to remove login skip after finish the game ( onclick(main(..))
-
 $(document).ready(function() {
 
     // register validation
@@ -224,7 +221,7 @@ function getRandomInt(min, max) {
 function generateRandomSettings() {
     let balls = getRandomInt(50, 91);
     let monsters = getRandomInt(1, 5);
-    let time = getRandomInt(60, 181);
+    let time = getRandomInt(60, 601);
     document.getElementById('MoveUp_input').value = "ArrowUp";
     document.getElementById('MoveDown_input').value = "ArrowDown";
     document.getElementById('MoveRight_input').value = "ArrowRight";
@@ -264,7 +261,7 @@ function menu(nav) {
         $('#timer').show();
         animate();
     } else {
-        resetGame();
+        BreakAnimation();
     }
 };
 
@@ -322,6 +319,7 @@ function isLightColor(color) {
     }
 }
 
+// Handle text color when changing ball color. Dark ball -> Ligh text and otherwise.
 var color_of_5_balls = document.getElementById('color1').value;
 var color_of_15_balls = document.getElementById('color2').value;
 var color_of_25_balls = document.getElementById('color3').value;

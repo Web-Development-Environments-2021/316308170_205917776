@@ -2,7 +2,7 @@
 
 
 class MoveObject {
-    constructor(X, Y, vx, vy, center_point,name = "asd") {
+    constructor(X, Y, vx, vy, center_point, name = "asd") {
         this.name = name;
         this.X = X;
         this.Y = Y;
@@ -48,9 +48,7 @@ class MoveObject {
     // Check if can turn  -->>> need to add accurate!can turn on the right px.
 
     checkForTurnCollision(vx, vy) {
-
         if (!this.checkRealPoint()) return true;
-
         if (vx > 0) { //right
             if (grid[this.locationOngrid[1]][this.locationOngrid[0] + 1] == 3) return true;
         } else if (vx < 0) { //left
@@ -60,11 +58,10 @@ class MoveObject {
         } else if (vy < 0) { //up
             if (grid[this.locationOngrid[1] - 1][this.locationOngrid[0]] == 3) return true;
         }
-
         return false;
     }
 
-
+    // check if object reached the teleport cell and return the next cell it's teleported to.
     checkIfEdge() {
         if (this.locationOngrid[0] == 27 && this.locationOngrid[1] == 14 && this.vx > 0 && this.vy == 0) {
             return board.getPixel([0, 14]);
